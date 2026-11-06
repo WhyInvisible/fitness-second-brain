@@ -2,44 +2,36 @@
 id: recovery-is-part-of-training
 type: concept
 domain: universal
-subjects: [recovery, sleep, adaptation]
+subjects: [recovery, periodisation]
 sources: []
-related: [progressive-overload, dont-stack-high-intensity, a-goal-wins-conflicts]
+related: [consistency-beats-intensity, sequence-by-recovery-cost, listen-to-morning-signals]
 mocs: [MOC-training-principles]
 status: permanent
 core: true
-created: 2026-01-01
+created: 2026-05-22
 ---
 
 # Recovery is part of training
 
-Training is the stimulus; the adaptation happens afterwards, while recovering. A session the body can't recover from adds fatigue without adding fitness. With several disciplines in one plan, recovery is usually the first thing to fail.
-
-## Signals worth watching
-
-- Resting heart rate drifting up over several days.
-- HRV trending down against the athlete's own baseline. Compare like with like: SDNN (Apple) and RMSSD (Garmin) are different measures and can't be compared with each other.
-- Easy pace at a given heart rate getting slower, i.e. cardiac cost rising.
-- Short sleep, or sleep scores falling, for several nights.
-- Sessions feeling harder than their RPE target, or niggles that linger instead of fading.
-
-One bad reading is noise. Trust a trend across three or more days.
+Adaptation happens in rest, not in the session. Under-recovering wastes the work you did -- the stimulus you applied doesn't convert to adaptation because the body never gets to consolidate it.
 
 ## Practical application
+- Easy runs *are* training -- they're the substrate adaptation grows on.
+- Sleep is the biggest single recovery lever.
+- A skipped session is sometimes the highest-value training decision of the week.
 
-- Easy days stay genuinely easy, by heart rate and feel, not chased to a pace.
-- When several signals line up, cut the volume of the next quality session or swap it for an easy one. Don't reschedule it onto a later day.
-- Sleep is the cheapest performance tool there is. Flag chronic short sleep in the weekly review.
+## Failure mode
+Stacking quality on quality with insufficient rest produces fatigue without fitness. The athlete feels they're "working hard" but isn't getting faster -- the work isn't converting.
 
 ## Related concepts
 
-- [progressive-overload](progressive-overload.md)
-- [dont-stack-high-intensity](dont-stack-high-intensity.md)
-- [a-goal-wins-conflicts](a-goal-wins-conflicts.md)
+- [consistency-beats-intensity](consistency-beats-intensity.md)
+- [sequence-by-recovery-cost](sequence-by-recovery-cost.md)
+- [listen-to-morning-signals](listen-to-morning-signals.md)
 
 ## Sources
 
-- *(add as you distil sources)*
+- *(none yet)*
 
 ## Maps of Content
 

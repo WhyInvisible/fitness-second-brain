@@ -4,40 +4,37 @@ type: concept
 domain: universal
 subjects: [loading, tendons, periodisation]
 sources: []
-related: [recovery-is-part-of-training, dont-stack-high-intensity]
+related: [consistency-beats-intensity, cutbacks-every-3-4-weeks, earn-the-next-progression]
 mocs: [MOC-training-principles]
 status: permanent
 core: true
-created: 2026-01-01
+created: 2026-05-22
 ---
 
-# Progressive overload, but slowly
+# Progressive overload -- but slowly
 
-Fitness comes from asking the body for a little more than it is used to, then letting it adapt. The catch is that different tissues adapt at different speeds, and the slowest one sets the safe rate of increase.
+~10%/week increase in volume or load is a soft ceiling. Tendons and joints adapt slower than muscle and cardiovascular system -- going faster invites injury.
 
-## Why the slowest tissue sets the pace
-
-- The heart and lungs respond within days to weeks.
-- Muscle strength responds within weeks.
-- Tendon, ligament and bone take months.
-
-Fitness that outruns the connective tissue feels great right up until something gets injured. A rough ceiling of **about 10% more volume or load per week** keeps the gap small.
+## Why the 10% rule
+- Cardiovascular fitness improves in days-weeks.
+- Muscular strength improves in weeks.
+- Tendon, ligament, and bone density improve in months.
+- The slowest-adapting tissue is the rate-limiter.
 
 ## Practical application
-
-- **Running volume:** raise weekly distance by no more than ~10%, and hold or drop it every 3–4 weeks (a cutback week).
-- **Strength:** add load only when every set of the current load is clean, with reps in reserve.
-- **Skills (calisthenics, mobility):** move to the next progression only when the current one is solid for several sessions.
-- **After a break:** rebuild from what was actually done recently, not from the old peak.
+- Weekly mileage: cap weekly increases at ~10% during base, slower in marathon build.
+- Strength loads: +2.5 kg per week max during rebuild phases.
+- Calisthenics progressions: don't advance until current step is solid (5+ clean reps).
 
 ## Related concepts
 
-- [recovery-is-part-of-training](recovery-is-part-of-training.md): overload only works if the recovery to absorb it is there
-- [dont-stack-high-intensity](dont-stack-high-intensity.md)
+- [consistency-beats-intensity](consistency-beats-intensity.md)
+- [cutbacks-every-3-4-weeks](cutbacks-every-3-4-weeks.md)
+- [earn-the-next-progression](earn-the-next-progression.md)
 
 ## Sources
 
-- *(add as you distil sources: see CLAUDE.md → Distil a source)*
+- *(none yet)*
 
 ## Maps of Content
 

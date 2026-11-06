@@ -10,20 +10,31 @@ If `profile.md` no longer contains `<!-- setup: pending`, setup has already run.
 
 You'll ask about them and their goals, find out whether they already have a plan, connect their watch if they have one, and publish two private pages (their plan, and their progress) that update themselves as training data comes in.
 
-## 2. Profile → `profile.md`
+## 2. Profile interview → `profile.md`
 
-Ask about, then fill in every section of `profile.md`:
-- basics (age, height/weight, metric or imperial, timezone)
-- training history: years per discipline, peak volumes, past races and results, long breaks
-- current fitness: recent race or time-trial results, max/resting HR if known. Mark estimates as estimates.
-- availability: days per week, minutes per session, fixed days, where the long session fits, upcoming travel
-- equipment and facilities
-- injuries and niggles: **one table row per zone**. The weekly review checks each row every week, so probe for this: "anything that flares up when volume goes up?"
-- coaching preferences
+The concept notes and MOCs are deliberately generic. They say things like "if the athlete has a hamstring history" or "from a recent benchmark", and **this interview is what personalises them**. Ask about every area below and fill in the matching section of `profile.md`. Take it a few questions at a time. If something is unknown, write "unknown" and move on; if they'd rather not say, respect that. If a sync is already possible (step 5), you can come back and fill benchmarks from data instead of asking.
+
+1. **Basics:** age, height, current weight (and when / how measured), units, timezone, resting HR, max HR (measured or estimated?). Sex is optional; ask only if relevant.
+2. **Running benchmarks:** recent 5K / 10K / half / marathon results with dates and conditions, PBs, average weekly distance over the last 4–8 weeks, longest recent run, easy pace and the HR it comes at, threshold pace / HR if known, the watch's VO2max estimate, and whether fitness is rising, flat, or returning after a break.
+3. **Strength:** current working loads or recent best lifts (squat, hinge / deadlift, split squat, press, row), or none, and any lift they avoid and why.
+4. **Calisthenics and skills:** max strict pull-ups, push-ups, dips, pistols, holds (L-sit, handstand), and the skills they're working toward.
+5. **Mobility / yoga and other sports:** how often, what style, tight areas; climbing, cycling, swimming or team sports and how much recovery they take.
+6. **Training history:** years in each discipline, peak volumes, past races and **how they went**: where it fell apart, cramping, pacing or fuelling problems, what they'd change. Breaks and layoffs (when, why, what was maintained). What has and hasn't worked for them before.
+7. **Injuries and niggles: one table row per body part.** Ask about current *and past* injuries: when and how it happened, diagnosis and treatment, current status, what aggravates it, what helps, what to watch for. Probe: "anything that flares up when volume goes up?", "any lift or movement you avoid?", "any cramping in races?". Also ask (optional) about health conditions or medications that affect training, such as anything that changes heart rate. The weekly review checks every row each week.
+8. **Equipment and access:** shoes, watch / HR strap, gym, home kit, routes / track / hills / pool.
+9. **Weekly schedule:** for each day, fixed commitments, best training window and max session length; where the long session fits; upcoming travel, holidays or busy periods, with dates and what's possible while away.
+10. **Nutrition and body composition:** diet style and restrictions, rough intake, protein habits, fuelling on long sessions and gut tolerance, sweat / hydration and any cramping history, and whether they have a weight or body-composition goal (current, target, by when), or none.
+11. **Recovery and lifestyle:** typical sleep, job (desk, on feet, shifts), stress, anything else that regularly affects recovery.
+12. **Coaching preferences:** blunt or gentle, how much detail, sessions they love or hate, how often they want check-ins.
 
 ## 3. Goals → `goals.md`
 
-Exactly one A-goal (what, when, target, and a fallback target), then B/C goals and key dates. If they name two A-goals, explain [a-goal-wins-conflicts](../../concepts/a-goal-wins-conflicts.md) and ask them to pick one.
+- Exactly one **A-goal**: what, when, target, a fallback target if a checkpoint says the main one isn't on, and why it matters. If they name two, explain [a-goal-wins-conflicts](../../concepts/a-goal-wins-conflicts.md) and ask them to pick one.
+- **Supporting goals** (VO2max, calisthenics base, strength, mobility, a climbing grade...): the target, how it's measured, and whether it's maintained or progressed during the A-goal build.
+- **Why this ordering:** what gets cut first when a week gets squeezed.
+- **Body composition:** a target and approach if they want one; otherwise write "no weight goal".
+- **Key dates:** races, tune-ups, checkpoints, travel, planned breaks.
+- **Longer term:** the 1–3 year direction.
 
 ## 4. Do they already have a plan?
 

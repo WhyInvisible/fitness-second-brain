@@ -118,6 +118,8 @@ No Artifact tool here? `python scripts/build-artifacts.py --mark-local all`. Nev
 
 ### Knowledge base (Zettelkasten)
 
+The ~140 concept notes and 16 MOCs are **generic**: distilled from training books, written for any athlete. They personalise through `profile.md` and `goals.md`. When a note says "if the athlete has a hamstring history" or "from a recent benchmark", look the answer up in the profile; if it isn't there, ask the athlete and add it. Never write one athlete's details back into a concept note. Their data lives in `profile.md`, `goals.md`, `plans/` and `logs/` only.
+
 1. **Atomic notes.** One idea per file in `concepts/`, in your own words. A new principle gets a new note, not a section appended to an old one.
 2. **Dense links.** Every concept links its sources, related concepts and the MOCs that include it, and says where it agrees, extends or conflicts.
 3. **MOCs for navigation.** When you'd reach for "a list of X", build or extend a MOC.

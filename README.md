@@ -2,13 +2,13 @@
 
 A training workspace you run with an AI agent (built for [Claude Code](https://claude.com/claude-code)). It combines:
 
-- **A second brain:** a Zettelkasten knowledge base of training principles, workouts and exercises, grown by distilling the books and plans you trust.
+- **A second brain:** a Zettelkasten knowledge base of ~140 atomic training concepts and 16 maps of content (running, strength, calisthenics, mobility, recovery, injury management), distilled from established training books and cited. You grow it further by distilling the books and plans you trust.
 - **Your plan:** imported from wherever you already have one (a coach, Runna, a spreadsheet, a book) or built with you from your goals.
 - **Your data:** synced from a Garmin, Apple Watch, Strava (Coros, Polar, Suunto, Wahoo...) or plain FIT/GPX/TCX files, into one format.
 - **Two live pages:** your plan with actual sessions laid over it, and your progress (heartbeats per km, pace against heart rate). They are published as private Claude Artifacts and republish themselves when new data comes in.
 - **Optional:** a Telegram bot for logging from your phone, daily pings and an approve-or-refine Sunday review, plus a local dashboard.
 
-It ships empty: no plan, no data, no one's profile. The agent sets it up by interviewing you.
+The knowledge is generic; there's no plan, no data and no one's profile. The agent personalises it by interviewing you: your injuries, history, benchmarks, weight, schedule and goals go into `profile.md` and `goals.md`, and every concept note is applied through them.
 
 ## Quick start
 
@@ -20,8 +20,8 @@ It ships empty: no plan, no data, no one's profile. The agent sets it up by inte
    claude
    ```
 3. Type **`/setup`**. The agent will:
-   - ask about you: history, current fitness, availability, injuries;
-   - ask about your goal: one A-goal, plus the rest;
+   - interview you: training and race history, current benchmarks, injuries and niggles, weight and nutrition, equipment, weekly schedule, sleep and lifestyle;
+   - ask about your goals: one A-goal, supporting goals, body composition, key dates;
    - **ask whether you already have a plan**, and import it or build one with you;
    - help you connect your watch (you type credentials into `.env` yourself; they never go in chat);
    - backfill a few weeks of data and publish your two pages.

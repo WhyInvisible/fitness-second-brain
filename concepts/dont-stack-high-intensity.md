@@ -1,36 +1,42 @@
 ---
 id: dont-stack-high-intensity
 type: concept
-domain: universal
-subjects: [scheduling, intensity, recovery]
+domain: multi-discipline
+subjects: [recovery, sequence]
 sources: []
-related: [recovery-is-part-of-training, progressive-overload, a-goal-wins-conflicts]
+related: [sequence-by-recovery-cost, recovery-is-part-of-training, marathon-goal-wins-conflicts]
 mocs: [MOC-training-principles]
 status: permanent
 core: true
-created: 2026-01-01
+created: 2026-05-22
 ---
 
-# Don't stack high-intensity sessions
+# Don't stack high-intensity work on the same day
 
-Hard sessions such as threshold runs, intervals, heavy lower-body strength and long runs each need roughly 48 hours before the next hard effort. Putting them back to back, or doing a heavy leg day the evening before a key run, means at least one of them is done tired and both lose value.
+Hard run AND heavy lift AND skill calisthenics in 24h is a recipe for breakdown.
 
-## Practical application
+## Why
+CNS recovery is finite per 24h cycle. Each high-intensity stimulus draws from the same pool. Stacking three = pool emptied = none of them produce adaptation, but all of them produce fatigue.
 
-- Keep at least one easy or rest day between hard days.
-- **Hard days hard, easy days easy.** If two hard things must share a day, run first and lift later (same day, at least 6 hours apart), so the next day can be easy.
-- Heavy lower-body work never goes the day before the long run or the key session of the week.
-- When a week gets squeezed by travel, illness or work, drop a session instead of compressing two into fewer days.
+## The exceptions
+- AM run + PM strength is OK IF run is easy
+- Hard run AM + heavy strength PM is OK occasionally IF energy permits
+- Three hard sessions in one day is never OK for an amateur in marathon training
+
+## Default rules
+- No heavy or high-intensity session the day before a long run
+- Pair a hard run with a heavy lift only on days with the most recovery time around them (check the athlete's weekly schedule in [profile.md](../profile.md))
+- If two collide, the A-race goal wins
 
 ## Related concepts
 
+- [sequence-by-recovery-cost](sequence-by-recovery-cost.md)
 - [recovery-is-part-of-training](recovery-is-part-of-training.md)
-- [progressive-overload](progressive-overload.md)
-- [a-goal-wins-conflicts](a-goal-wins-conflicts.md): decides which session gets dropped when two collide
+- [marathon-goal-wins-conflicts](marathon-goal-wins-conflicts.md)
 
 ## Sources
 
-- *(add as you distil sources)*
+- *(none yet)*
 
 ## Maps of Content
 
