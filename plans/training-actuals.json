@@ -1,0 +1,17 @@
+{
+  "_schema": {
+    "description": "Reviewed log of runs, keyed by date. One entry per day. Synced runs that are not in here yet still appear on the published pages, marked 'synced — not yet reviewed'; an entry here replaces that with the reviewed numbers and the athlete's own words.",
+    "fields": {
+      "km": "distance in km (0 for a deliberate rest / skipped day)",
+      "pace": "m:ss/km — may be followed by detail, e.g. '5:40/km · splits 5:45/5:38/...'",
+      "avg_hr": "average heart rate",
+      "max_hr": "max heart rate",
+      "cal": "calories",
+      "vo2max": "watch VO2max estimate, if any",
+      "comment": "how it felt, in the athlete's own words or a faithful summary",
+      "notes": "objective flags worth surfacing: HR vs pace mismatch, niggles, trends",
+      "session_type": "optional override for the progress page: easy | quality | long",
+      "source": "garmin | apple_health | strava | files | manual"
+    }
+  }
+}

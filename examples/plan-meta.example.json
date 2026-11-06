@@ -1,0 +1,55 @@
+{
+ "title": "Training Plan",
+ "event": "Example City Half Marathon",
+ "event_date": "2027-05-16",
+ "subtitle": "Eleven weeks, day by day. Logged sessions show actual against planned.",
+ "stats": [
+  {
+   "num": "Sub-1:45",
+   "lbl": "Target time"
+  },
+  {
+   "num": "4:58/km",
+   "lbl": "Goal pace"
+  },
+  {
+   "num": "55 km",
+   "lbl": "Peak week"
+  }
+ ],
+ "long_run_km": 15,
+ "reality_note": "Optional one-paragraph read on how the block is actually going, rewritten at each weekly review.",
+ "checkpoints_heading": "Checkpoints that decide the target",
+ "checkpoints": [
+  {
+   "title": "5K time trial",
+   "when": "Week 5",
+   "rows": [
+    {
+     "band": "long",
+     "result": "<= 22:30",
+     "reading": "Ahead of plan; consider sub-1:42."
+    },
+    {
+     "band": "easy",
+     "result": "22:30-23:30",
+     "reading": "On track. No changes."
+    },
+    {
+     "band": "race",
+     "result": "> 23:30",
+     "reading": "Retarget to ~1:50 before the build block."
+    }
+   ]
+  }
+ ],
+ "notes": [
+  {
+   "summary": "How the paces were set",
+   "body": [
+    "From a recent 10K via a VDOT table; re-benchmarked at each checkpoint."
+   ]
+  }
+ ],
+ "footer": "Built from plans/plan-data.json. Run /log-training after a session to update it."
+}

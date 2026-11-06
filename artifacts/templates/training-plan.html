@@ -1,0 +1,1370 @@
+<!-- Built into artifacts/training-plan.html by scripts/build-artifacts.py.
+     Edit THIS file for styling/layout/copy changes. Data comes from plans/plan-data.json,
+     plan-meta.json, session-library.json, training-actuals.json and data/sync-cache.json --
+     never hand-edit the built output file. -->
+<title>__PAGE_TITLE__</title>
+<style>
+  @media (prefers-reduced-motion: reduce) {
+    * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+  }
+
+  :root {
+    --bg: #F1F2EF;
+    --surface: #FFFFFF;
+    --surface-2: #E6E8E2;
+    --surface-3: #DBDED6;
+    --ink: #1B1F1D;
+    --ink-soft: #565D58;
+    --ink-faint: #868C86;
+    --border: #D3D6CD;
+    --accent: #DD4E1E;
+    --accent-ink: #FFFFFF;
+    --shadow: 0 1px 2px rgba(27,31,29,0.06), 0 6px 20px rgba(27,31,29,0.05);
+
+    --c-rest: #8D9490;
+    --c-easy: #2E8577;
+    --c-steady: #6E5C99;
+    --c-lt1: #B9860E;
+    --c-lt2: #BD6C1E;
+    --c-mp: #DD4E1E;
+    --c-long: #33549C;
+    --c-race: #B23A14;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #14181A;
+      --surface: #1B2022;
+      --surface-2: #232A2C;
+      --surface-3: #2C3436;
+      --ink: #ECEEEA;
+      --ink-soft: #A2A9A5;
+      --ink-faint: #757C78;
+      --border: #333C3E;
+      --accent: #FF6A38;
+      --accent-ink: #14181A;
+      --shadow: 0 1px 2px rgba(0,0,0,0.35), 0 8px 24px rgba(0,0,0,0.35);
+
+      --c-rest: #7B8380;
+      --c-easy: #45B09E;
+      --c-steady: #9A87D6;
+      --c-lt1: #E4B23F;
+      --c-lt2: #E68F45;
+      --c-mp: #FF6A38;
+      --c-long: #7191D9;
+      --c-race: #FF7A47;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #14181A;
+    --surface: #1B2022;
+    --surface-2: #232A2C;
+    --surface-3: #2C3436;
+    --ink: #ECEEEA;
+    --ink-soft: #A2A9A5;
+    --ink-faint: #757C78;
+    --border: #333C3E;
+    --accent: #FF6A38;
+    --accent-ink: #14181A;
+    --shadow: 0 1px 2px rgba(0,0,0,0.35), 0 8px 24px rgba(0,0,0,0.35);
+
+    --c-rest: #7B8380;
+    --c-easy: #45B09E;
+    --c-steady: #9A87D6;
+    --c-lt1: #E4B23F;
+    --c-lt2: #E68F45;
+    --c-mp: #FF6A38;
+    --c-long: #7191D9;
+    --c-race: #FF7A47;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--ink);
+  }
+
+  body {
+    font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .display {
+    font-family: Bahnschrift, "Segoe UI Semibold", "Arial Narrow", sans-serif;
+    font-stretch: condensed;
+  }
+
+  .mono {
+    font-family: ui-monospace, "Cascadia Code", "Consolas", "Roboto Mono", monospace;
+    font-variant-numeric: tabular-nums;
+  }
+
+  a { color: var(--accent); }
+
+  .wrap {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 0 20px 80px;
+  }
+
+  /* ---------- Masthead ---------- */
+
+  .masthead {
+    padding: 40px 0 28px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 24px;
+  }
+
+  .eyebrow {
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 700;
+    margin: 0 0 10px;
+  }
+
+  h1.display {
+    font-size: clamp(2.1rem, 5vw, 3.4rem);
+    font-weight: 700;
+    margin: 0 0 6px;
+    letter-spacing: 0.01em;
+    text-wrap: balance;
+    line-height: 1.05;
+  }
+
+  .subtitle {
+    color: var(--ink-soft);
+    font-size: 1.05rem;
+    max-width: 62ch;
+    margin: 0 0 22px;
+  }
+
+  .stat-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .stat-chip {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 14px;
+    box-shadow: var(--shadow);
+    min-width: 118px;
+  }
+
+  .stat-chip .num {
+    font-size: 1.3rem;
+    font-weight: 700;
+    display: block;
+  }
+
+  .stat-chip .lbl {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--ink-faint);
+  }
+
+  .stat-chip.accent {
+    border-color: var(--accent);
+  }
+  .stat-chip.accent .num { color: var(--accent); }
+
+  /* ---------- Progress rail ---------- */
+
+  .rail-section { margin-bottom: 28px; }
+
+  .rail-title {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    color: var(--ink-faint);
+    margin: 0 0 10px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .rail {
+    display: flex;
+    gap: 3px;
+    height: 34px;
+  }
+
+  .rail-tick {
+    flex: 1;
+    position: relative;
+    border-radius: 3px;
+    background: var(--surface-3);
+    cursor: pointer;
+    border: none;
+    padding: 0;
+  }
+
+  .rail-tick[data-current="true"] {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  .rail-tick .wk-num {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.68rem;
+    color: var(--surface);
+    opacity: 0;
+    font-family: ui-monospace, monospace;
+  }
+
+  .rail-tick:hover .wk-num, .rail-tick:focus-visible .wk-num { opacity: 1; }
+
+  .rail-tick:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  /* ---------- Block reality ---------- */
+
+  .reality {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 18px;
+    margin-bottom: 32px;
+    box-shadow: var(--shadow);
+  }
+  .reality-note {
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    margin: 0 0 14px;
+    max-width: 72ch;
+  }
+  .reality-summary {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .reality-summary .rs {
+    background: var(--surface-2);
+    border-radius: 8px;
+    padding: 9px 13px;
+    min-width: 104px;
+  }
+  .reality-summary .rs .n {
+    display: block;
+    font-size: 1.15rem;
+    font-weight: 700;
+    font-family: ui-monospace, "Cascadia Code", "Consolas", monospace;
+    font-variant-numeric: tabular-nums;
+  }
+  .reality-summary .rs .l {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ink-faint);
+  }
+
+  table.reality-table { width: 100%; border-collapse: collapse; min-width: 480px; }
+  table.reality-table th {
+    text-align: left;
+    font-size: 0.66rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ink-faint);
+    padding: 6px 8px;
+    border-bottom: 1px solid var(--border);
+    font-weight: 600;
+  }
+  table.reality-table td {
+    padding: 7px 8px;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.84rem;
+  }
+  table.reality-table tr:last-child td { border-bottom: none; }
+  table.reality-table td.rt-num {
+    font-family: ui-monospace, "Cascadia Code", "Consolas", monospace;
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+    white-space: nowrap;
+  }
+  table.reality-table tr.rt-future td { color: var(--ink-faint); }
+  table.reality-table tr.rt-now td { background: var(--surface-2); font-weight: 600; }
+  .rt-bar {
+    display: block;
+    height: 7px;
+    border-radius: 4px;
+    background: var(--surface-3);
+    position: relative;
+    min-width: 60px;
+    overflow: hidden;
+  }
+  .rt-bar i {
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    border-radius: 4px;
+    background: var(--c-easy);
+  }
+  .rt-bar i[data-short="true"] { background: var(--c-lt2); }
+  .rt-bar i[data-miss="true"] { background: var(--c-race); }
+  .rt-delta { font-size: 0.78rem; }
+  .rt-delta[data-sign="down"] { color: var(--c-race); }
+  .rt-delta[data-sign="up"] { color: var(--c-easy); }
+  .rt-revised {
+    font-size: 0.66rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--c-lt1);
+    font-weight: 700;
+  }
+
+  /* ---------- Legend ---------- */
+
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 18px;
+    margin-bottom: 32px;
+    padding: 14px 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+  }
+
+  .swatch {
+    width: 11px;
+    height: 11px;
+    border-radius: 3px;
+    flex: none;
+  }
+
+  /* ---------- Key sessions strip ---------- */
+
+  .section-heading {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    color: var(--ink-faint);
+    margin: 0 0 12px;
+  }
+
+  .key-strip {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+    margin-bottom: 36px;
+    scrollbar-width: thin;
+  }
+
+  .key-card {
+    flex: none;
+    width: 180px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--c-mp);
+    border-radius: 8px;
+    padding: 12px 14px;
+    box-shadow: var(--shadow);
+  }
+
+  .key-card .kc-date {
+    font-size: 0.72rem;
+    color: var(--ink-faint);
+    font-family: ui-monospace, monospace;
+  }
+
+  .key-card .kc-label {
+    font-weight: 700;
+    margin: 3px 0 6px;
+    font-size: 0.92rem;
+  }
+
+  .key-card .kc-detail {
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+    line-height: 1.4;
+  }
+
+  /* ---------- Signpost + thresholds ---------- */
+
+  .signpost-wrap {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 18px 6px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow);
+  }
+
+  .signpost-note {
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    margin: 0 0 14px;
+    max-width: 68ch;
+  }
+
+  table.signpost { width: 100%; border-collapse: collapse; }
+  table.signpost th {
+    text-align: left;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ink-faint);
+    padding: 6px 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  table.signpost td {
+    padding: 9px 10px;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.88rem;
+  }
+  table.signpost tr:last-child td { border-bottom: none; font-weight: 700; }
+  table.signpost td.sp-pace, table.signpost td.sp-vdot, table.signpost td.sp-5k {
+    font-family: ui-monospace, monospace;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  table.signpost td.sp-vdot, table.signpost td.sp-5k { color: var(--ink-soft); }
+
+  .threshold-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin-bottom: 36px;
+  }
+  @media (min-width: 720px) { .threshold-grid { grid-template-columns: 1fr 1fr; } }
+
+  .threshold-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 18px;
+    box-shadow: var(--shadow);
+  }
+  .threshold-card h3 {
+    margin: 0 0 3px;
+    font-size: 1rem;
+  }
+  .threshold-card .tc-when {
+    font-size: 0.78rem;
+    color: var(--ink-faint);
+    font-family: ui-monospace, monospace;
+    margin: 0 0 14px;
+  }
+  .tc-row {
+    display: flex;
+    gap: 10px;
+    padding: 8px 0;
+    border-top: 1px solid var(--border);
+    align-items: baseline;
+  }
+  .tc-row:first-of-type { border-top: none; }
+  .tc-result {
+    font-family: ui-monospace, monospace;
+    font-variant-numeric: tabular-nums;
+    font-weight: 700;
+    flex: none;
+    width: 92px;
+  }
+  .tc-band {
+    width: 8px;
+    align-self: stretch;
+    border-radius: 3px;
+    flex: none;
+  }
+  .tc-reading { font-size: 0.85rem; color: var(--ink-soft); }
+  .tc-reading strong { color: var(--ink); }
+
+  /* ---------- Calorie methodology ---------- */
+
+  details.method {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-bottom: 36px;
+    box-shadow: var(--shadow);
+  }
+
+  details.method summary {
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 0.92rem;
+    list-style: none;
+  }
+  details.method summary::-webkit-details-marker { display: none; }
+  details.method summary::before {
+    content: "+ ";
+    color: var(--accent);
+  }
+  details.method[open] summary::before { content: "\2212 "; }
+
+  details.method .method-body {
+    margin-top: 12px;
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+  }
+  details.method .method-body p { margin: 0 0 10px; }
+  details.method .method-body p:last-child { margin-bottom: 0; }
+
+  /* ---------- Weeks ---------- */
+
+  #weeks { display: flex; flex-direction: column; gap: 12px; }
+
+  details.week {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    scroll-margin-top: 16px;
+  }
+
+  details.week[data-current="true"] {
+    border-color: var(--accent);
+  }
+
+  summary.week-head {
+    cursor: pointer;
+    list-style: none;
+    padding: 14px 18px;
+    display: grid;
+    grid-template-columns: 52px 1fr auto auto auto 20px;
+    gap: 14px;
+    align-items: center;
+  }
+  summary.week-head::-webkit-details-marker { display: none; }
+
+  summary.week-head:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: -2px;
+  }
+
+  .wk-badge {
+    font-family: Bahnschrift, "Arial Narrow", sans-serif;
+    font-stretch: condensed;
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: var(--ink-faint);
+    text-align: center;
+  }
+  details.week[data-current="true"] .wk-badge { color: var(--accent); }
+
+  .wk-info { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .wk-info .wk-phase {
+    font-weight: 700;
+    font-size: 0.98rem;
+  }
+  .wk-info .wk-dates {
+    font-size: 0.78rem;
+    color: var(--ink-faint);
+    font-family: ui-monospace, monospace;
+  }
+
+  .wk-pill {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 4px 9px;
+    border-radius: 20px;
+    background: var(--surface-2);
+    color: var(--ink-soft);
+    white-space: nowrap;
+    display: none;
+  }
+  @media (min-width: 640px) { .wk-pill { display: inline-block; } }
+
+  .wk-km {
+    font-family: ui-monospace, monospace;
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+    white-space: nowrap;
+  }
+  .wk-km .n { font-size: 1.15rem; font-weight: 700; }
+  .wk-km .u { font-size: 0.7rem; color: var(--ink-faint); }
+
+  .wk-actual {
+    display: block;
+    font-size: 0.68rem;
+    color: var(--c-easy);
+    font-weight: 600;
+    text-align: right;
+    margin-top: 2px;
+  }
+
+  .wk-chevron {
+    color: var(--ink-faint);
+    transition: transform 0.15s ease;
+    justify-self: end;
+  }
+  details.week[open] .wk-chevron { transform: rotate(180deg); }
+
+  .wk-current-flag {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--accent);
+    font-weight: 700;
+    display: none;
+  }
+  details.week[data-current="true"] .wk-current-flag { display: inline; }
+
+  .week-body { padding: 0 18px 18px; }
+
+  .table-scroll { overflow-x: auto; }
+
+  table.days {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 720px;
+  }
+
+  table.days th {
+    text-align: left;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ink-faint);
+    padding: 6px 10px;
+    border-bottom: 1px solid var(--border);
+    font-weight: 600;
+  }
+
+  table.days td {
+    padding: 10px 10px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    font-size: 0.88rem;
+  }
+
+  table.days tr:last-child td { border-bottom: none; }
+
+  table.days tr.today-row { background: var(--surface-2); }
+
+  td.day-cell {
+    border-left: 4px solid var(--type-color, var(--c-rest));
+    white-space: nowrap;
+  }
+  td.day-cell .d-date { font-family: ui-monospace, monospace; font-size: 0.78rem; color: var(--ink-faint); }
+  td.day-cell .d-dow { font-weight: 700; }
+  tr.logged-row .d-dow::after {
+    content: " \2713";
+    color: var(--c-easy);
+  }
+
+  td.session-cell .s-label { font-weight: 600; }
+  td.session-cell .s-tag {
+    display: inline-block;
+    font-size: 0.66rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--type-color, var(--ink-faint));
+    margin-left: 6px;
+  }
+
+  td.km-cell {
+    font-family: ui-monospace, monospace;
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+    white-space: nowrap;
+    font-weight: 600;
+  }
+
+  td.cal-cell {
+    font-family: ui-monospace, monospace;
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+    white-space: nowrap;
+    color: var(--ink-soft);
+  }
+
+  td.pace-cell { color: var(--ink-soft); max-width: 190px; }
+  td.note-cell { color: var(--ink-soft); min-width: 220px; max-width: 340px; }
+
+  tr.race-row td { background: color-mix(in srgb, var(--c-race) 12%, transparent); font-weight: 600; }
+  tr.mp-row td.day-cell { border-left-color: var(--c-mp); }
+
+  tr.actual-row td {
+    background: var(--surface-2);
+    font-size: 0.84rem;
+    padding: 10px 14px 12px;
+    border-left: 4px solid var(--c-easy);
+  }
+  tr.actual-row .actual-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 6px 14px;
+    margin-bottom: 7px;
+  }
+  tr.actual-row .actual-tag {
+    font-size: 0.66rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--c-easy);
+    font-weight: 700;
+    flex: none;
+  }
+  tr.actual-row .actual-source {
+    font-size: 0.68rem;
+    color: var(--ink-faint);
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+  tr.actual-row .actual-metrics {
+    font-family: ui-monospace, "Cascadia Code", "Consolas", "Roboto Mono", monospace;
+    font-variant-numeric: tabular-nums;
+    font-size: 0.8rem;
+    color: var(--ink);
+  }
+  tr.actual-row .actual-comment,
+  tr.actual-row .actual-notes {
+    margin: 0 0 6px;
+    max-width: 92ch;
+    line-height: 1.5;
+  }
+  tr.actual-row .actual-comment { color: var(--ink-soft); font-style: italic; }
+  tr.actual-row .actual-notes {
+    color: var(--ink-faint);
+    font-size: 0.8rem;
+    margin-bottom: 0;
+  }
+
+  /* ---------- Session chips + modal ---------- */
+
+  .sess-chips { margin-top: 5px; display: flex; flex-wrap: wrap; gap: 5px; }
+
+  button.sess-chip {
+    font: inherit;
+    font-size: 0.7rem;
+    line-height: 1.3;
+    padding: 3px 9px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: var(--surface-2);
+    color: var(--ink-soft);
+    cursor: pointer;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: background 0.12s ease, border-color 0.12s ease, color 0.12s ease;
+  }
+  button.sess-chip::before {
+    content: "";
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--chip-color, var(--ink-faint));
+    flex: none;
+  }
+  button.sess-chip:hover, button.sess-chip:focus-visible {
+    background: var(--surface-3);
+    border-color: var(--chip-color, var(--accent));
+    color: var(--ink);
+  }
+  button.sess-chip:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .sess-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(10,13,12,0.55);
+    display: none;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 24px 16px;
+    overflow-y: auto;
+    z-index: 50;
+  }
+  .sess-backdrop[data-open="true"] { display: flex; }
+
+  .sess-modal {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: 0 12px 48px rgba(0,0,0,0.3);
+    max-width: 620px;
+    width: 100%;
+    margin: auto;
+    padding: 22px 24px 24px;
+  }
+
+  .sess-modal-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 14px;
+    margin-bottom: 16px;
+  }
+  .sess-modal h2 {
+    margin: 0 0 4px;
+    font-size: 1.25rem;
+    font-family: Bahnschrift, "Segoe UI Semibold", "Arial Narrow", sans-serif;
+    font-stretch: condensed;
+    letter-spacing: 0.01em;
+  }
+  .sess-modal .sess-sub { margin: 0; font-size: 0.82rem; color: var(--ink-soft); }
+
+  button.sess-close {
+    font: inherit;
+    font-size: 1.4rem;
+    line-height: 1;
+    background: none;
+    border: none;
+    color: var(--ink-faint);
+    cursor: pointer;
+    padding: 2px 6px;
+    border-radius: 6px;
+    flex: none;
+  }
+  button.sess-close:hover { color: var(--ink); background: var(--surface-2); }
+  button.sess-close:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .sess-block { margin-bottom: 18px; }
+  .sess-block h3 {
+    margin: 0 0 8px;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-faint);
+    font-weight: 700;
+  }
+  .sess-block .table-scroll { overflow-x: auto; }
+  table.sess-table { width: 100%; border-collapse: collapse; min-width: 320px; }
+  table.sess-table th {
+    text-align: left;
+    font-size: 0.66rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--ink-faint);
+    padding: 5px 8px;
+    border-bottom: 1px solid var(--border);
+    font-weight: 600;
+  }
+  table.sess-table td {
+    padding: 7px 8px;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.85rem;
+    vertical-align: top;
+  }
+  table.sess-table tr:last-child td { border-bottom: none; }
+  table.sess-table td:first-child { font-weight: 600; }
+
+  .sess-notes {
+    background: var(--surface-2);
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin: 0;
+    list-style: none;
+  }
+  .sess-notes li {
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+    padding-left: 16px;
+    position: relative;
+    margin-bottom: 7px;
+    line-height: 1.45;
+  }
+  .sess-notes li:last-child { margin-bottom: 0; }
+  .sess-notes li::before {
+    content: "\2014";
+    position: absolute;
+    left: 0;
+    color: var(--chip-color, var(--accent));
+  }
+
+  /* ---------- Footer ---------- */
+
+  footer {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    color: var(--ink-faint);
+    font-size: 0.82rem;
+    line-height: 1.6;
+  }
+  footer p { max-width: 70ch; }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <p class="eyebrow" id="eyebrow">&nbsp;</p>
+    <h1 class="display" id="page-title">Training Plan</h1>
+    <p class="subtitle" id="subtitle-line"></p>
+    <div class="stat-row" id="stat-row">
+      <div class="stat-chip accent" id="countdown-chip"><span class="num" id="countdown-num">&nbsp;</span><span class="lbl" id="countdown-lbl">days to go</span></div>
+    </div>
+  </header>
+
+  <section class="rail-section" data-needs-plan>
+    <p class="rail-title"><span id="rail-start"></span><span id="rail-end"></span></p>
+    <div class="rail" id="rail"></div>
+  </section>
+
+  <section class="legend" id="legend" data-needs-plan></section>
+
+  <p class="section-heading" data-needs-plan>Where the block actually stands</p>
+  <section class="reality" data-needs-plan>
+    <p class="reality-note" id="reality-note"></p>
+    <div class="reality-summary" id="reality-summary"></div>
+    <div class="table-scroll">
+      <table class="reality-table">
+        <thead><tr><th>Wk</th><th>Phase</th><th class="rt-num">Plan</th><th class="rt-num">Actual</th><th style="width:34%">&nbsp;</th><th class="rt-num">Long run</th></tr></thead>
+        <tbody id="reality-body"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <p class="section-heading" id="key-heading" data-needs-plan>Key sessions</p>
+  <div class="key-strip" id="key-strip" data-needs-plan></div>
+
+  <div id="checkpoints"></div>
+  <div id="meta-notes"></div>
+
+  <p class="section-heading" data-needs-plan>Week by week</p>
+  <div id="weeks"></div>
+
+  <footer>
+    <p id="footer-text"></p>
+  </footer>
+
+</div>
+
+<div class="sess-backdrop" id="sess-backdrop" role="dialog" aria-modal="true" aria-labelledby="sess-title">
+  <div class="sess-modal" id="sess-modal"></div>
+</div>
+
+<script id="plan-data" type="application/json">__PLAN_DATA__</script>
+<script id="session-data" type="application/json">__SESSION_DATA__</script>
+<script id="plan-meta" type="application/json">__PLAN_META__</script>
+<script>
+(function () {
+  var weeks = JSON.parse(document.getElementById('plan-data').textContent);
+  var META = JSON.parse(document.getElementById('plan-meta').textContent) || {};
+  var RACE_DATE = META.event_date ? new Date(META.event_date + 'T00:00:00') : null;
+  var today = new Date();
+  today.setHours(0,0,0,0);
+  var HAS_CAL = weeks.some(function (w) { return w.days.some(function (d) { return d.cal != null; }); });
+
+  var TYPE_LABEL = {
+    rest: 'Rest', easy: 'Easy', strides: 'Easy + strides', steady: 'Steady / tempo',
+    lt1: 'Sub-threshold (LT1)', lt2: 'Threshold (LT2)', mp: 'Marathon pace', long: 'Long run', race: 'Race day'
+  };
+  var LEGEND = [
+    ['rest','Rest'], ['easy','Easy / strides'], ['steady','Steady / tempo'],
+    ['lt1','Sub-threshold (LT1)'], ['lt2','Threshold (LT2)'], ['mp','Marathon pace'],
+    ['long','Long run'], ['race','Race day']
+  ];
+
+  function fmtDate(iso) {
+    var d = new Date(iso + 'T00:00:00');
+    return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+  }
+
+  function typeColorVar(t) { return 'var(--c-' + t + ')'; }
+  function esc(s) { return (s == null) ? '' : String(s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+
+  var SESSIONS = JSON.parse(document.getElementById('session-data').textContent);
+
+  var KIND_COLOR = {
+    legs: 'var(--c-mp)', upper: 'var(--c-steady)', stability: 'var(--c-easy)',
+    skill: 'var(--c-long)', yoga: 'var(--c-rest)'
+  };
+  function kindColor(k) { return KIND_COLOR[k] || 'var(--ink-faint)'; }
+
+  var sessBackdrop = document.getElementById('sess-backdrop');
+  var sessModal = document.getElementById('sess-modal');
+  var lastFocused = null;
+
+  function renderSession(key) {
+    var s = SESSIONS[key];
+    if (!s) return;
+    var html = '<div class="sess-modal-head"><div>' +
+      '<h2 id="sess-title">' + esc(s.label) + '</h2>' +
+      (s.subtitle ? '<p class="sess-sub">' + esc(s.subtitle) + '</p>' : '') +
+      '</div><button type="button" class="sess-close" id="sess-close" aria-label="Close">&times;</button></div>';
+
+    (s.blocks || []).forEach(function (b) {
+      html += '<div class="sess-block"><h3>' + esc(b.title) + '</h3><div class="table-scroll"><table class="sess-table">';
+      if (b.cols) {
+        html += '<thead><tr>' + b.cols.map(function (c) { return '<th>' + esc(c) + '</th>'; }).join('') + '</tr></thead>';
+      }
+      html += '<tbody>' + (b.rows || []).map(function (r) {
+        return '<tr>' + r.map(function (cell) { return '<td>' + esc(cell) + '</td>'; }).join('') + '</tr>';
+      }).join('') + '</tbody></table></div></div>';
+    });
+
+    if (s.notes && s.notes.length) {
+      html += '<ul class="sess-notes">' + s.notes.map(function (n) {
+        return '<li>' + esc(n) + '</li>';
+      }).join('') + '</ul>';
+    }
+
+    sessModal.style.setProperty('--chip-color', kindColor(s.kind));
+    sessModal.innerHTML = html;
+    sessBackdrop.setAttribute('data-open', 'true');
+    var closeBtn = document.getElementById('sess-close');
+    closeBtn.addEventListener('click', closeSession);
+    closeBtn.focus();
+  }
+
+  function closeSession() {
+    sessBackdrop.setAttribute('data-open', 'false');
+    sessModal.innerHTML = '';
+    if (lastFocused && lastFocused.focus) lastFocused.focus();
+    lastFocused = null;
+  }
+
+  document.addEventListener('click', function (e) {
+    var chip = e.target.closest ? e.target.closest('button.sess-chip') : null;
+    if (chip) {
+      e.preventDefault();
+      lastFocused = chip;
+      renderSession(chip.getAttribute('data-session'));
+      return;
+    }
+    if (e.target === sessBackdrop) closeSession();
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && sessBackdrop.getAttribute('data-open') === 'true') closeSession();
+  });
+
+  // ---- header, from plans/plan-meta.json ----
+  document.getElementById('eyebrow').textContent =
+    [META.event, META.event_date ? new Date(META.event_date + 'T00:00:00').toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }) : '']
+      .filter(Boolean).join(' \u00b7 ') || 'Training plan';
+  document.getElementById('page-title').textContent = META.title || 'Training Plan';
+  document.getElementById('subtitle-line').textContent = META.subtitle ||
+    'Day by day: distance, pace and what to watch for. Logged sessions show actual against planned.';
+  var statRow = document.getElementById('stat-row');
+  (META.stats || []).forEach(function (st) {
+    var chip = document.createElement('div');
+    chip.className = 'stat-chip';
+    chip.innerHTML = '<span class="num mono">' + esc(st.num) + '</span><span class="lbl">' + esc(st.lbl) + '</span>';
+    statRow.appendChild(chip);
+  });
+  document.getElementById('footer-text').textContent = META.footer ||
+    'Built from plans/plan-data.json with logged sessions from plans/training-actuals.json. ' +
+    'Days marked "synced" came straight from the watch and have not been reviewed yet.';
+
+  // ---- countdown ----
+  var countNum = document.getElementById('countdown-num');
+  var countLbl = document.getElementById('countdown-lbl');
+  if (!RACE_DATE) {
+    document.getElementById('countdown-chip').hidden = true;
+  } else {
+    var diffDays = Math.round((RACE_DATE - today) / 86400000);
+    if (diffDays > 0) {
+      countNum.textContent = diffDays;
+      countLbl.textContent = 'days to go';
+    } else if (diffDays === 0) {
+      countNum.textContent = 'Today';
+      countLbl.textContent = 'event day';
+    } else {
+      countNum.textContent = 'Done';
+      countLbl.textContent = 'event has passed';
+    }
+  }
+
+  // ---- optional checkpoints + notes ----
+  if (META.checkpoints && META.checkpoints.length) {
+    var cpHost = document.getElementById('checkpoints');
+    var cpHtml = '<p class="section-heading">' + esc(META.checkpoints_heading || 'Checkpoints') + '</p><div class="threshold-grid">';
+    META.checkpoints.forEach(function (cp) {
+      cpHtml += '<div class="threshold-card"><h3>' + esc(cp.title) + '</h3>' +
+        (cp.when ? '<p class="tc-when">' + esc(cp.when) + '</p>' : '') +
+        (cp.rows || []).map(function (r) {
+          return '<div class="tc-row"><div class="tc-band" style="background:var(--c-' + esc(r.band || 'easy') + ')"></div>' +
+            '<div class="tc-result mono">' + esc(r.result) + '</div><div class="tc-reading">' + esc(r.reading) + '</div></div>';
+        }).join('') + '</div>';
+    });
+    cpHost.innerHTML = cpHtml + '</div>';
+  }
+  (META.notes || []).forEach(function (n) {
+    var det = document.createElement('details');
+    det.className = 'method';
+    det.innerHTML = '<summary>' + esc(n.summary) + '</summary><div class="method-body">' +
+      (n.body || []).map(function (para) { return '<p>' + esc(para) + '</p>'; }).join('') + '</div>';
+    document.getElementById('meta-notes').appendChild(det);
+  });
+
+  // ---- empty state: no plan yet ----
+  if (!weeks.length) {
+    Array.prototype.forEach.call(document.querySelectorAll('[data-needs-plan]'), function (el) { el.hidden = true; });
+    document.getElementById('weeks').innerHTML =
+      '<p class="reality-note">No plan yet. Ask your agent to run <code>/setup</code> &mdash; it will import a plan you already have or draft one from your goals.</p>';
+    return;
+  }
+  var lastDate = weeks[weeks.length - 1].end;
+  document.getElementById('rail-start').textContent = 'Week ' + weeks[0].week + ' \u00b7 ' + fmtDate(weeks[0].start);
+  document.getElementById('rail-end').textContent = (RACE_DATE ? 'Event' : 'End') + ' \u00b7 ' + fmtDate(META.event_date || lastDate);
+
+  // ---- find current week index ----
+  var currentIdx = -1;
+  weeks.forEach(function (w, i) {
+    var s = new Date(w.start + 'T00:00:00');
+    var e = new Date(w.end + 'T00:00:00');
+    if (today >= s && today <= e) currentIdx = i;
+  });
+  if (currentIdx === -1) {
+    if (today < new Date(weeks[0].start + 'T00:00:00')) currentIdx = -1;
+    else currentIdx = weeks.length - 1;
+  }
+
+  // ---- legend ----
+  var legendEl = document.getElementById('legend');
+  LEGEND.forEach(function (pair) {
+    var item = document.createElement('div');
+    item.className = 'legend-item';
+    item.innerHTML = '<span class="swatch" style="background:' + typeColorVar(pair[0]) + '"></span>' + pair[1];
+    legendEl.appendChild(item);
+  });
+  var loggedLegend = document.createElement('div');
+  loggedLegend.className = 'legend-item';
+  loggedLegend.innerHTML = '<span class="swatch" style="background:var(--c-easy)"></span>&check; Logged (actual vs. planned)';
+  legendEl.appendChild(loggedLegend);
+
+  // ---- progress rail ----
+  var rail = document.getElementById('rail');
+  weeks.forEach(function (w, i) {
+    var btn = document.createElement('button');
+    btn.className = 'rail-tick';
+    btn.type = 'button';
+    btn.title = 'Week ' + w.week + ' — ' + w.phase;
+    if (i === currentIdx) btn.setAttribute('data-current', 'true');
+    var hasRace = w.days.some(function (d) { return d.type === 'race'; });
+    var hasMp = w.days.some(function (d) { return d.type === 'mp'; });
+    var bg = 'var(--surface-3)';
+    if (hasRace) bg = 'var(--c-race)';
+    else if (hasMp) bg = 'var(--c-mp)';
+    else if (i === currentIdx) bg = 'var(--c-easy)';
+    btn.style.background = bg;
+    var span = document.createElement('span');
+    span.className = 'wk-num';
+    span.textContent = w.week;
+    btn.appendChild(span);
+    btn.addEventListener('click', function () {
+      var target = document.getElementById('week-' + w.week);
+      if (target) { target.open = true; target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+    rail.appendChild(btn);
+  });
+
+  // ---- block reality ----
+  var rBody = document.getElementById('reality-body');
+  var doneP = 0, doneA = 0, longestPlanned = 0, longestActual = 0, runDays = 0;
+
+  weeks.forEach(function (w, i) {
+    var actual = 0, hasAny = false, lp = 0, la = 0;
+    w.days.forEach(function (d) {
+      if (d.actual && typeof d.actual.km === 'number') {
+        actual += d.actual.km;
+        if (d.actual.km > 0) { hasAny = true; runDays++; }
+        if (d.actual.km > longestActual) longestActual = d.actual.km;
+      }
+      if (d.type === 'long' || d.type === 'mp') {
+        if (d.km > lp) lp = d.km;
+        if (d.actual && d.actual.km > la) la = d.actual.km;
+      }
+    });
+    if (lp > longestPlanned) longestPlanned = lp;
+
+    var past = i < currentIdx;
+    var now = i === currentIdx;
+    if (past || now) { doneP += w.total; doneA += actual; }
+
+    var tr = document.createElement('tr');
+    if (now) tr.className = 'rt-now';
+    else if (i > currentIdx) tr.className = 'rt-future';
+
+    var pct = w.total ? Math.min(120, (actual / w.total) * 100) : 0;
+    var short = pct < 85, miss = pct < 60;
+    var delta = actual - w.total;
+    var bar = (past || now)
+      ? '<span class="rt-bar"><i style="width:' + Math.min(100, pct) + '%"' +
+        (miss ? ' data-miss="true"' : (short ? ' data-short="true"' : '')) + '></i></span>'
+      : (w.revised ? '<span class="rt-revised">revised</span>' : '');
+
+    var actualCell = (past || now)
+      ? '<strong>' + (Math.round(actual * 10) / 10) + '</strong> <span class="rt-delta" data-sign="' +
+        (delta < 0 ? 'down' : 'up') + '">' + (delta >= 0 ? '+' : '') + (Math.round(delta * 10) / 10) + '</span>'
+      : '&mdash;';
+
+    tr.innerHTML =
+      '<td class="rt-num">' + w.week + '</td>' +
+      '<td>' + esc(w.phase) + '</td>' +
+      '<td class="rt-num">' + w.total + '</td>' +
+      '<td class="rt-num">' + actualCell + '</td>' +
+      '<td>' + bar + '</td>' +
+      '<td class="rt-num">' + (lp ? (past || now ? (la ? la : 0) + ' / ' + lp : lp) : '&mdash;') + '</td>';
+    rBody.appendChild(tr);
+  });
+
+  var pctDone = doneP ? Math.round((doneA / doneP) * 100) : 0;
+  document.getElementById('reality-summary').innerHTML =
+    '<div class="rs"><span class="n">' + Math.round(doneA) + ' km</span><span class="l">Run so far</span></div>' +
+    '<div class="rs"><span class="n">' + Math.round(doneP) + ' km</span><span class="l">Planned so far</span></div>' +
+    '<div class="rs"><span class="n">' + pctDone + '%</span><span class="l">Of plan hit</span></div>' +
+    '<div class="rs"><span class="n">' + longestActual + ' km</span><span class="l">Longest run</span></div>' +
+    '<div class="rs"><span class="n">' + runDays + '</span><span class="l">Runs logged</span></div>';
+
+  var realityNote = document.getElementById('reality-note');
+  if (META.reality_note) realityNote.textContent = META.reality_note;
+  else realityNote.hidden = true;
+
+  // ---- key sessions strip ----
+  var KEY_DATES = [];
+  weeks.forEach(function (w) {
+    w.days.forEach(function (d) {
+      if (d.key || d.type === 'mp' || d.type === 'race') {
+        KEY_DATES.push(d);
+      }
+    });
+  });
+  var keyStrip = document.getElementById('key-strip');
+  if (!KEY_DATES.length) { keyStrip.hidden = true; document.getElementById('key-heading').hidden = true; }
+  KEY_DATES.forEach(function (d) {
+    var card = document.createElement('div');
+    card.className = 'key-card';
+    card.style.borderLeftColor = typeColorVar(d.type === 'race' ? 'race' : (d.type === 'mp' ? 'mp' : 'lt2'));
+    card.innerHTML =
+      '<div class="kc-date mono">' + fmtDate(d.date) + ' &middot; ' + d.dow + '</div>' +
+      '<div class="kc-label">' + esc(d.label) + '</div>' +
+      '<div class="kc-detail">' + esc(d.km) + ' km &mdash; ' + esc(d.pace || '') + '</div>';
+    keyStrip.appendChild(card);
+  });
+
+  // ---- weeks ----
+  var weeksEl = document.getElementById('weeks');
+  weeks.forEach(function (w, i) {
+    var det = document.createElement('details');
+    det.className = 'week';
+    det.id = 'week-' + w.week;
+    if (i === currentIdx) { det.setAttribute('data-current', 'true'); det.open = true; }
+
+    var loggedDays = w.days.filter(function (d) { return d.actual; });
+    if (loggedDays.length) det.open = true;
+    var actualTotal = loggedDays.reduce(function (s, d) { return s + (d.actual.km || 0); }, 0);
+
+    var summary = document.createElement('summary');
+    summary.className = 'week-head';
+    summary.innerHTML =
+      '<span class="wk-badge mono">W' + w.week + '</span>' +
+      '<span class="wk-info"><span class="wk-phase">' + esc(w.phase) + '<span class="wk-current-flag">&nbsp;&middot; this week</span></span>' +
+        '<span class="wk-dates">' + fmtDate(w.start) + ' &ndash; ' + fmtDate(w.end) + '</span></span>' +
+      (w.tag ? '<span class="wk-pill">' + esc(w.tag) + '</span>' : '') +
+      '<span class="wk-km"><span class="n">' + w.total + '</span><span class="u"> km planned</span>' +
+        (loggedDays.length ? '<span class="wk-actual">&check; ' + (Math.round(actualTotal * 10) / 10) + ' km logged (' + loggedDays.length + '/7)</span>' : '') +
+      '</span>' +
+      '<span class="wk-chevron">&#9660;</span>';
+    det.appendChild(summary);
+
+    var body = document.createElement('div');
+    body.className = 'week-body';
+
+    var scroll = document.createElement('div');
+    scroll.className = 'table-scroll';
+    var table = document.createElement('table');
+    table.className = 'days';
+    table.innerHTML =
+      '<thead><tr><th>Day</th><th>Session</th><th>Km</th><th>Pace / effort</th>' + (HAS_CAL ? '<th>Kcal</th>' : '') + '<th>Notes</th></tr></thead>';
+    var tbody = document.createElement('tbody');
+
+    w.days.forEach(function (d) {
+      var tr = document.createElement('tr');
+      var classes = [];
+      var dDate = new Date(d.date + 'T00:00:00');
+      if (dDate.getTime() === today.getTime()) classes.push('today-row');
+      if (d.type === 'race') classes.push('race-row');
+      if (d.type === 'mp') classes.push('mp-row');
+      if (d.actual) classes.push('logged-row');
+      tr.className = classes.join(' ');
+
+      var strengthNote = '';
+      if (d.sessions && d.sessions.length) {
+        strengthNote = '<div class="sess-chips">' + d.sessions.map(function (k) {
+          var s = SESSIONS[k];
+          if (!s) return '';
+          return '<button type="button" class="sess-chip" data-session="' + esc(k) +
+                 '" style="--chip-color:' + kindColor(s.kind) + '">' + esc(s.label) + '</button>';
+        }).join('') + '</div>';
+      } else if (d.strength) {
+        strengthNote = '<br><span style="color:var(--ink-faint)">+ ' + esc(d.strength) + '</span>';
+      }
+      var noteText = esc(d.note || '');
+
+      tr.innerHTML =
+        '<td class="day-cell" style="--type-color:' + typeColorVar(d.type) + '"><span class="d-dow">' + d.dow + '</span><br><span class="d-date">' + fmtDate(d.date) + '</span></td>' +
+        '<td class="session-cell"><span class="s-label">' + esc(d.label) + '</span><span class="s-tag">' + esc(TYPE_LABEL[d.type] || d.type || '') + '</span>' + strengthNote + '</td>' +
+        '<td class="km-cell">' + (d.km > 0 ? esc(d.km) : '&mdash;') + '</td>' +
+        '<td class="pace-cell">' + (d.pace && d.pace !== '-' ? esc(d.pace) : '&mdash;') + '</td>' +
+        (HAS_CAL ? '<td class="cal-cell">' + (d.cal != null ? d.cal.toLocaleString() : '&mdash;') + '</td>' : '') +
+        '<td class="note-cell">' + noteText + '</td>';
+      tbody.appendChild(tr);
+
+      if (d.actual) {
+        var a = d.actual;
+        var atr = document.createElement('tr');
+        atr.className = 'actual-row';
+        var hrBits = [];
+        if (a.avg_hr) hrBits.push('HR ' + a.avg_hr + (a.max_hr ? '/' + a.max_hr : '') + ' avg/max');
+        var paceLine = [esc(a.pace || ''), hrBits.join(' ')].filter(Boolean).join(' &middot; ');
+        var sourceTag = a.auto
+          ? ' <span class="actual-source">(synced from ' + esc(a.source) + ' &mdash; not yet reviewed)</span>'
+          : (a.source ? ' <span class="actual-source">(' + esc(a.source) + ')</span>' : '');
+        var metrics = [];
+        if (a.km != null && a.km > 0) metrics.push('<strong>' + a.km + ' km</strong>');
+        if (a.pace) metrics.push(esc(a.pace));
+        if (hrBits.length) metrics.push(hrBits.join(' '));
+        if (a.cal != null) metrics.push(a.cal.toLocaleString() + ' kcal');
+        if (a.vo2max) metrics.push('VO&#8322;max ' + a.vo2max);
+
+        atr.innerHTML =
+          '<td colspan="' + (HAS_CAL ? 6 : 5) + '">' +
+            '<div class="actual-head">' +
+              '<span class="actual-tag">Actual' + sourceTag + '</span>' +
+              (metrics.length ? '<span class="actual-metrics">' + metrics.join(' &middot; ') + '</span>' : '') +
+            '</div>' +
+            (a.comment ? '<p class="actual-comment">' + esc(a.comment) + '</p>' : '') +
+            (a.notes ? '<p class="actual-notes">' + esc(a.notes) + '</p>' : '') +
+          '</td>';
+        tbody.appendChild(atr);
+      }
+    });
+
+    table.appendChild(tbody);
+    scroll.appendChild(table);
+    body.appendChild(scroll);
+    det.appendChild(body);
+    weeksEl.appendChild(det);
+  });
+
+  if (currentIdx >= 0) {
+    setTimeout(function () {
+      var el = document.getElementById('week-' + weeks[currentIdx].week);
+      if (el) el.scrollIntoView({ behavior: 'auto', block: 'center' });
+    }, 50);
+  }
+})();
+</script>

@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% block title %}This week — Fitness Planner{% endblock %}
+
+{% block content %}
+<section class="mb-8">
+  <div class="flex items-baseline justify-between mb-4">
+    <h1 class="text-2xl font-semibold tracking-tight">This week</h1>
+    <div class="text-sm text-stone-500">
+      {{ week_start.strftime('%a %d %b') }} &rarr; {{ week_end.strftime('%a %d %b') }}
+    </div>
+  </div>
+
+  <!-- Top-row stat cards -->
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-3 mb-6">
+    <div class="bg-white rounded-lg border border-stone-200 p-4">
+      <div class="text-xs uppercase tracking-wide text-stone-500 mb-1">Weather (now)</div>
+      <div hx-get="/api/weather" hx-trigger="load, every 600s" class="min-h-[1.5rem]">
+        <span class="text-stone-400 text-sm">loading...</span>
+      </div>
+    </div>
+    <div class="bg-white rounded-lg border border-stone-200 p-4">
+      <div class="text-xs uppercase tracking-wide text-stone-500 mb-1">Body (latest)</div>
+      {% if latest_wellness %}
+        <div class="text-sm text-stone-700 leading-tight">
+          {% set w = latest_wellness %}
+          {% if w.resting_hr %}<div>RHR <strong>{{ w.resting_hr }}</strong> bpm</div>{% endif %}
+          {% if w.hrv_last_night_ms %}<div>HRV <strong>{{ w.hrv_last_night_ms }}</strong> ms</div>{% endif %}
+          {% if w.sleep_total_min %}<div>Sleep <strong>{{ '%.1f'|format(w.sleep_total_min/60) }}h</strong>{% if w.sleep_score %} (score {{ w.sleep_score }}){% endif %}</div>{% endif %}
+        </div>
+      {% else %}
+        <div class="text-stone-400 text-sm">No synced data yet</div>
+      {% endif %}
+    </div>
+    <div class="bg-white rounded-lg border border-stone-200 p-4">
+      <div class="text-xs uppercase tracking-wide text-stone-500 mb-1">Week so far</div>
+      <div class="text-sm text-stone-700 leading-tight">
+        <div><strong>{{ metrics.activities|length }}</strong> sessions</div>
+        <div><strong>{{ metrics.run_km }}</strong> run km</div>
+        <div><strong>{{ metrics.total_min }}</strong> total min</div>
+      </div>
+    </div>
+    <div class="bg-white rounded-lg border border-stone-200 p-4">
+      <div class="text-xs uppercase tracking-wide text-stone-500 mb-1">Variation</div>
+      {% if metrics.by_type %}
+        <div class="text-sm text-stone-700 leading-tight">
+          {% for type, acts in metrics.by_type|dictsort %}
+            <div>{{ type|replace('_', ' ') }}: <strong>{{ acts|length }}</strong></div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="text-stone-400 text-sm">No activities this week yet</div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<!-- Plan body (rendered current-week.md) -->
+<section class="bg-white rounded-lg border border-stone-200 p-6 prose-page">
+  {{ week_html | safe }}
+</section>
+
+{% if metrics.activities %}
+<section class="mt-8">
+  <h2 class="text-lg font-semibold mb-3">Synced this week</h2>
+  <div class="bg-white rounded-lg border border-stone-200 overflow-hidden">
+    <table class="w-full text-sm">
+      <thead class="bg-stone-50 text-stone-500 uppercase text-xs">
+        <tr>
+          <th class="text-left px-4 py-2 font-medium">When</th>
+          <th class="text-left px-4 py-2 font-medium">Type</th>
+          <th class="text-right px-4 py-2 font-medium">Distance</th>
+          <th class="text-right px-4 py-2 font-medium">Duration</th>
+          <th class="text-right px-4 py-2 font-medium">Pace</th>
+          <th class="text-right px-4 py-2 font-medium">Avg HR</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-stone-100">
+        {% for a in metrics.activities %}
+          <tr>
+            <td class="px-4 py-2 font-mono text-xs">{{ a.start_local[:16].replace('T', ' ') }}</td>
+            <td class="px-4 py-2">{{ a.type|replace('_', ' ') }}</td>
+            <td class="px-4 py-2 text-right">{{ a.distance_km or '—' }} km</td>
+            <td class="px-4 py-2 text-right">{{ a.duration_min|round|int if a.duration_min else '—' }} min</td>
+            <td class="px-4 py-2 text-right">{{ a.avg_pace_per_km or '—' }}</td>
+            <td class="px-4 py-2 text-right">{{ a.avg_hr|round|int if a.avg_hr else '—' }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endif %}
+{% endblock %}

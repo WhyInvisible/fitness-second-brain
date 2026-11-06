@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}Stats — Fitness Planner{% endblock %}
+
+{% block content %}
+<section class="mb-6">
+  <h1 class="text-2xl font-semibold tracking-tight">Stats</h1>
+  <p class="text-sm text-stone-500 mt-1">
+    {{ cache_meta.n_activities }} activities in cache &middot;
+    {{ cache_meta.n_wellness_days }} wellness days archived &middot;
+    last sync {{ cache_meta.synced_at[:16].replace('T',' ') if cache_meta.synced_at else 'never' }}
+  </p>
+</section>
+
+<section class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-8">
+  <div class="bg-white rounded-lg border border-stone-200 p-4">
+    <div class="text-xs uppercase tracking-wide text-stone-500 mb-2">Last 7 days</div>
+    <div class="text-sm space-y-1">
+      <div><strong>{{ last7.activities|length }}</strong> sessions &middot; <strong>{{ last7.run_km }}</strong> run km &middot; <strong>{{ last7.total_min }}</strong> min total</div>
+      {% if last7.avg_rhr %}<div>RHR avg <strong>{{ last7.avg_rhr }}</strong> bpm</div>{% endif %}
+      {% if last7.avg_hrv %}<div>HRV avg <strong>{{ last7.avg_hrv }}</strong> ms</div>{% endif %}
+      {% if last7.avg_sleep_min %}<div>Sleep avg <strong>{{ '%.1f'|format(last7.avg_sleep_min/60) }}h</strong></div>{% endif %}
+    </div>
+  </div>
+  <div class="bg-white rounded-lg border border-stone-200 p-4">
+    <div class="text-xs uppercase tracking-wide text-stone-500 mb-2">Last 30 days</div>
+    <div class="text-sm space-y-1">
+      <div><strong>{{ last30.activities|length }}</strong> sessions &middot; <strong>{{ last30.run_km }}</strong> run km &middot; <strong>{{ last30.total_min }}</strong> min total</div>
+      {% if last30.avg_rhr %}<div>RHR avg <strong>{{ last30.avg_rhr }}</strong> bpm</div>{% endif %}
+      {% if last30.avg_hrv %}<div>HRV avg <strong>{{ last30.avg_hrv }}</strong> ms</div>{% endif %}
+      {% if last30.avg_sleep_min %}<div>Sleep avg <strong>{{ '%.1f'|format(last30.avg_sleep_min/60) }}h</strong></div>{% endif %}
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="text-lg font-semibold mb-3">Monthly volume</h2>
+  <div class="bg-white rounded-lg border border-stone-200 overflow-hidden">
+    <table class="w-full text-sm">
+      <thead class="bg-stone-50 text-stone-500 uppercase text-xs">
+        <tr>
+          <th class="text-left px-4 py-2 font-medium">Month</th>
+          <th class="text-right px-4 py-2 font-medium">Sessions</th>
+          <th class="text-right px-4 py-2 font-medium">Run km</th>
+          <th class="text-right px-4 py-2 font-medium">Total min</th>
+          <th class="text-left px-4 py-2 font-medium">Mix</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-stone-100">
+        {% for ym, m in months %}
+          <tr>
+            <td class="px-4 py-2 font-mono">{{ ym }}</td>
+            <td class="px-4 py-2 text-right">{{ m.count }}</td>
+            <td class="px-4 py-2 text-right">{{ m.km_running }}</td>
+            <td class="px-4 py-2 text-right">{{ m.total_min }}</td>
+            <td class="px-4 py-2 text-stone-600 text-xs">
+              {% for t, n in m.by_type|dictsort %}{{ t|replace('_',' ') }} {{ n }}{% if not loop.last %} &middot; {% endif %}{% endfor %}
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}

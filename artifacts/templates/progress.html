@@ -1,0 +1,369 @@
+<!-- Built into artifacts/progress.html by scripts/build-artifacts.py.
+     Edit THIS file for layout/copy; data comes from plans/training-actuals.json + data/sync-cache.json. -->
+<title>__PAGE_TITLE__</title>
+<style>
+  @media (prefers-reduced-motion: reduce) { * { animation-duration:.001ms !important; transition-duration:.001ms !important; } }
+
+  :root {
+    --bg:#F1F2EF; --surface:#FFFFFF; --surface-2:#E6E8E2; --surface-3:#DBDED6;
+    --ink:#1B1F1D; --ink-soft:#565D58; --ink-faint:#868C86; --border:#D3D6CD;
+    --accent:#DD4E1E; --grid:#E2E4DD;
+    --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a;
+    --seq-1:#cde2fb; --seq-2:#9ec5f4; --seq-3:#5598e7; --seq-4:#2a78d6; --seq-5:#1c5cab; --seq-6:#104281;
+    --good:#0ca30c;
+    --shadow:0 1px 2px rgba(27,31,29,.06), 0 6px 20px rgba(27,31,29,.05);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg:#14181A; --surface:#1B2022; --surface-2:#232A2C; --surface-3:#2C3436;
+      --ink:#ECEEEA; --ink-soft:#A2A9A5; --ink-faint:#757C78; --border:#333C3E;
+      --accent:#FF6A38; --grid:#2A3234;
+      --s1:#3987e5; --s2:#d95926; --s3:#199e70;
+      --seq-1:#184f95; --seq-2:#1c5cab; --seq-3:#256abf; --seq-4:#3987e5; --seq-5:#6da7ec; --seq-6:#9ec5f4;
+      --good:#0ca30c;
+      --shadow:0 1px 2px rgba(0,0,0,.35), 0 8px 24px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg:#14181A; --surface:#1B2022; --surface-2:#232A2C; --surface-3:#2C3436;
+    --ink:#ECEEEA; --ink-soft:#A2A9A5; --ink-faint:#757C78; --border:#333C3E;
+    --accent:#FF6A38; --grid:#2A3234;
+    --s1:#3987e5; --s2:#d95926; --s3:#199e70;
+    --seq-1:#184f95; --seq-2:#1c5cab; --seq-3:#256abf; --seq-4:#3987e5; --seq-5:#6da7ec; --seq-6:#9ec5f4;
+    --good:#0ca30c;
+    --shadow:0 1px 2px rgba(0,0,0,.35), 0 8px 24px rgba(0,0,0,.35);
+  }
+
+  * { box-sizing:border-box; }
+  html,body { margin:0; padding:0; background:var(--bg); color:var(--ink); }
+  body { font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; font-size:16px; line-height:1.5; -webkit-font-smoothing:antialiased; }
+  .mono { font-family:ui-monospace,"Cascadia Code",Consolas,"Roboto Mono",monospace; font-variant-numeric:tabular-nums; }
+  .wrap { max-width:1000px; margin:0 auto; padding:0 20px 80px; }
+
+  header.mast { padding:40px 0 24px; border-bottom:1px solid var(--border); margin-bottom:28px; }
+  .eyebrow { font-size:.78rem; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); font-weight:700; margin:0 0 10px; }
+  h1 { font-size:clamp(1.9rem,4.5vw,2.9rem); font-weight:700; margin:0 0 8px; letter-spacing:.01em; line-height:1.08; }
+  .sub { color:var(--ink-soft); max-width:64ch; margin:0; }
+
+  .tiles { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:12px; margin:24px 0 40px; }
+  .tile { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:16px 18px; box-shadow:var(--shadow); }
+  .tile .lbl { font-size:.7rem; text-transform:uppercase; letter-spacing:.07em; color:var(--ink-faint); margin-bottom:6px; }
+  .tile .num { font-size:1.75rem; font-weight:700; line-height:1.1; display:block; }
+  .tile .delta { font-size:.82rem; color:var(--ink-soft); margin-top:4px; }
+  .tile .delta b { color:var(--good); }
+  .tile.hero { border-color:var(--s1); }
+  .tile.hero .num { color:var(--s1); }
+
+  section.chart { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:20px 22px 14px; box-shadow:var(--shadow); margin-bottom:22px; }
+  section.chart h2 { margin:0 0 3px; font-size:1.05rem; }
+  section.chart .note { margin:0 0 16px; font-size:.85rem; color:var(--ink-soft); max-width:70ch; }
+  .plot { position:relative; overflow-x:auto; }
+  svg { display:block; max-width:100%; }
+  .grid-line { stroke:var(--grid); stroke-width:1; }
+  .axis-txt { fill:var(--ink-faint); font-size:11px; font-family:ui-monospace,monospace; }
+  .series-line { fill:none; stroke-width:2; stroke-linejoin:round; stroke-linecap:round; }
+  .trend { stroke-dasharray:5 4; stroke-width:2; fill:none; opacity:.55; }
+  .dot { stroke:var(--surface); stroke-width:2; }
+  .crosshair { stroke:var(--ink-faint); stroke-width:1; stroke-dasharray:3 3; opacity:0; }
+  .hit { fill:transparent; cursor:crosshair; }
+  .rest-col { opacity:.9; }
+
+  .legend { display:flex; flex-wrap:wrap; gap:8px 18px; margin:0 0 14px; }
+  .lg { display:flex; align-items:center; gap:7px; font-size:.8rem; color:var(--ink-soft); }
+  .sw { width:11px; height:11px; border-radius:3px; flex:none; }
+
+  .tip { position:absolute; pointer-events:none; background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:8px 11px; font-size:.8rem; box-shadow:var(--shadow); opacity:0; transition:opacity .1s; z-index:5; min-width:130px; }
+  .tip .d { font-family:ui-monospace,monospace; color:var(--ink-faint); font-size:.72rem; margin-bottom:3px; }
+  .tip .r { display:flex; justify-content:space-between; gap:14px; }
+  .tip .r span:last-child { font-family:ui-monospace,monospace; font-variant-numeric:tabular-nums; }
+
+  .smalls { display:grid; grid-template-columns:1fr; gap:22px; }
+  @media (min-width:760px) { .smalls { grid-template-columns:1fr 1fr; } }
+
+  details.tbl { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:16px 18px; box-shadow:var(--shadow); margin-bottom:22px; }
+  details.tbl summary { cursor:pointer; font-weight:700; font-size:.92rem; list-style:none; }
+  details.tbl summary::-webkit-details-marker { display:none; }
+  details.tbl summary::before { content:"+ "; color:var(--accent); }
+  details.tbl[open] summary::before { content:"\2212 "; }
+  .tw { overflow-x:auto; margin-top:14px; }
+  table { width:100%; border-collapse:collapse; min-width:520px; }
+  th { text-align:left; font-size:.68rem; text-transform:uppercase; letter-spacing:.06em; color:var(--ink-faint); padding:6px 10px; border-bottom:1px solid var(--border); }
+  td { padding:7px 10px; border-bottom:1px solid var(--border); font-size:.85rem; }
+  td.n { font-family:ui-monospace,monospace; font-variant-numeric:tabular-nums; text-align:right; }
+  tr:last-child td { border-bottom:none; }
+  .pill { display:inline-block; font-size:.66rem; text-transform:uppercase; letter-spacing:.04em; padding:2px 8px; border-radius:20px; background:var(--surface-2); color:var(--ink-soft); }
+
+  footer { margin-top:36px; padding-top:20px; border-top:1px solid var(--border); color:var(--ink-faint); font-size:.82rem; line-height:1.6; }
+  footer p { max-width:72ch; }
+</style>
+
+<div class="wrap">
+  <header class="mast">
+    <p class="eyebrow" id="eyebrow">Training block</p>
+    <h1>Progress</h1>
+    <p class="sub">Every logged run. The question this page answers: <strong>is the same effort producing more speed?</strong> The headline numbers below compare <strong>easy runs only</strong> &mdash; quality sessions and long runs are run at different efforts, so mixing them would blur the trend.</p>
+  </header>
+
+  <div class="tiles" id="tiles"></div>
+
+  <section class="chart">
+    <h2>Cardiac cost &mdash; heartbeats per kilometre</h2>
+    <p class="note">Average heart rate &times; minutes per kilometre. It folds pace and heart rate into one number on one axis, so there is no dual-axis sleight of hand. <strong>Lower is better</strong> &mdash; fewer beats to cover the same ground.</p>
+    <div class="plot" id="p-cost"></div>
+  </section>
+
+  <section class="chart">
+    <h2>Pace against heart rate</h2>
+    <p class="note">Every run, plotted by its pace and its average heart rate. Colour runs light&nbsp;&rarr;&nbsp;dark with time. <strong>Improvement moves the cloud toward the bottom-left</strong> &mdash; faster, for fewer beats.</p>
+    <div class="plot" id="p-scatter"></div>
+  </section>
+
+  <div class="smalls">
+    <section class="chart">
+      <h2>Average heart rate</h2>
+      <p class="note">The two components, separately.</p>
+      <div class="plot" id="p-hr"></div>
+    </section>
+    <section class="chart">
+      <h2>Pace</h2>
+      <p class="note">Faster is lower on the axis.</p>
+      <div class="plot" id="p-pace"></div>
+    </section>
+  </div>
+
+  <details class="tbl">
+    <summary>Every run, as a table</summary>
+    <div class="tw"><table id="tbl"></table></div>
+  </details>
+
+  <footer>
+    <p>Built from <code>plans/training-actuals.json</code> (reviewed runs) and <code>data/sync-cache.json</code> (synced runs not yet reviewed) by <code>scripts/build-artifacts.py</code> &mdash; regenerates whenever new data lands. Cardiac cost is a derived metric (avg HR &times; pace in minutes); it is sensitive to terrain, heat, hydration and illness, so single points move for reasons that have nothing to do with fitness. The trend across many runs is the signal, not any one of them.</p>
+  </footer>
+</div>
+
+<script id="run-data" type="application/json">__RUN_DATA__</script>
+<script id="day-data" type="application/json">__DAY_DATA__</script>
+<script id="plan-meta" type="application/json">__PLAN_META__</script>
+<script>
+(function () {
+  var RUNS = JSON.parse(document.getElementById('run-data').textContent);
+  var DAYS = JSON.parse(document.getElementById('day-data').textContent);
+  var META = JSON.parse(document.getElementById('plan-meta').textContent) || {};
+  if (META.event) document.getElementById('eyebrow').textContent = META.event + ' \u00b7 training block';
+  var TYPE = { easy:{c:'var(--s1)',n:'Easy'}, long:{c:'var(--s2)',n:'Long run'}, quality:{c:'var(--s3)',n:'Quality'} };
+  var SEQ = ['var(--seq-1)','var(--seq-2)','var(--seq-3)','var(--seq-4)','var(--seq-5)','var(--seq-6)'];
+
+  function esc(s){ return String(s==null?'':s).replace(/[&<>]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c];}); }
+  function mmss(m){ var t=Math.round(m*60); return Math.floor(t/60)+':'+String(t%60).padStart(2,'0'); }
+  function fmtDate(d){ var p=d.split('-'); return p[2]+' '+['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][+p[1]-1]; }
+  function el(tag,attrs,txt){ var e=document.createElementNS('http://www.w3.org/2000/svg',tag);
+    for(var k in attrs) e.setAttribute(k,attrs[k]); if(txt!=null) e.textContent=txt; return e; }
+
+  if (!RUNS.length) {
+    document.getElementById('tiles').innerHTML = '';
+    Array.prototype.forEach.call(document.querySelectorAll('section.chart, .smalls, details.tbl'), function (e) { e.hidden = true; });
+    document.getElementById('tiles').insertAdjacentHTML('afterend',
+      '<p class="sub">No runs with pace and heart rate yet. Sync your watch or log a run and this page fills itself in.</p>');
+    return;
+  }
+
+  // ---- stat tiles -------------------------------------------------------
+  // Headline comparison uses EASY runs only -- quality sessions and long runs are run
+  // at different efforts, so mixing them would make the trend meaningless.
+  var EASY = RUNS.filter(function(r){ return r.type === 'easy'; });
+  var avg = function(a,f){ return a.reduce(function(s,x){return s+f(x);},0)/a.length; };
+  var totalKm = RUNS.reduce(function(s,r){return s+r.km;},0);
+  var unit = function(u){ return '<span style="font-size:.9rem;font-weight:400"> '+u+'</span>'; };
+  // Lower is better for all three; a rise is shown without the green "good" colour.
+  function change(before, now, fmt){
+    var d = now - before;
+    var txt = (d <= 0 ? '&minus;' : '+') + fmt(Math.abs(d));
+    return d <= 0 ? '<b>'+txt+'</b>' : txt;
+  }
+  var tilesHtml;
+  if (EASY.length >= 2) {
+    var k = Math.min(3, Math.floor(EASY.length / 2));
+    var first = EASY.slice(0,k), last = EASY.slice(-k);
+    var c0 = avg(first,function(r){return r.cost;}), c1 = avg(last,function(r){return r.cost;});
+    var h0 = avg(first,function(r){return r.hr;}),   h1 = avg(last,function(r){return r.hr;});
+    var p0 = avg(first,function(r){return r.pace;}), p1 = avg(last,function(r){return r.pace;});
+    tilesHtml =
+      tile('Cardiac cost now','hero', Math.round(c1)+unit('beats/km'),
+           'from '+Math.round(c0)+' &mdash; '+change(c0,c1,function(v){return (100*v/c0).toFixed(1)+'%';})) +
+      tile('Avg heart rate','', Math.round(h1)+unit('bpm'),
+           'from '+Math.round(h0)+' &mdash; '+change(h0,h1,function(v){return v.toFixed(0)+' bpm';})) +
+      tile('Avg pace','', mmss(p1)+unit('/km'),
+           'from '+mmss(p0)+'/km &mdash; '+change(p0,p1,function(v){return Math.round(v*60)+' s/km';}));
+  } else {
+    tilesHtml = tile('Cardiac cost','hero', '&mdash;', 'needs at least two easy runs to show a trend');
+  }
+  document.getElementById('tiles').innerHTML = tilesHtml +
+    tile('Logged','', RUNS.length+unit('runs'), Math.round(totalKm)+' km since '+fmtDate(RUNS[0].date));
+
+  function tile(lbl,cls,num,delta){
+    return '<div class="tile '+cls+'"><div class="lbl">'+lbl+'</div><span class="num mono">'+num+'</span><div class="delta">'+delta+'</div></div>';
+  }
+
+  // ---- generic time-series line chart -----------------------------------
+  function lineChart(host, key, opts) {
+    // X IS A CALENDAR AXIS, not a run index: every day between the first and
+    // last run gets a slot, so rest days are visible as gaps.
+    var W=host.clientWidth||660, H=(opts.h||260), M={t:14,r:16,b:30,l:opts.l||46};
+    var iw=W-M.l-M.r, ih=H-M.t-M.b;
+    var ND=DAYS.length;
+    var runDays=DAYS.map(function(d,i){ return d.run?{i:i,r:d.run}:null; }).filter(Boolean);
+    var vals=runDays.map(function(p){ return p.r[key]; });
+    var lo=Math.min.apply(null,vals), hi=Math.max.apply(null,vals);
+    var pad=(hi-lo)*0.14||1; lo-=pad; hi+=pad;
+    var x=function(i){ return M.l + (ND<2?iw/2:i*iw/(ND-1)); };
+    var y=function(v){ return M.t + ih - (v-lo)/(hi-lo)*ih; };
+    var stepPx = ND>1 ? iw/(ND-1) : iw;
+
+    var svg=el('svg',{viewBox:'0 0 '+W+' '+H,width:W,height:H,role:'img','aria-label':opts.aria});
+
+    // rest-day columns, drawn first so everything else sits on top
+    var colW=Math.max(2,Math.min(stepPx-1.5,9));
+    DAYS.forEach(function(d,i){
+      if(d.run) return;
+      svg.appendChild(el('rect',{x:x(i)-colW/2,y:M.t,width:colW,height:ih,
+                                 fill:'var(--surface-2)',class:'rest-col'}));
+    });
+
+    for(var g=0; g<=4; g++){
+      var gv=lo+(hi-lo)*g/4, gy=y(gv);
+      svg.appendChild(el('line',{x1:M.l,x2:W-M.r,y1:gy,y2:gy,class:'grid-line'}));
+      svg.appendChild(el('text',{x:M.l-8,y:gy+4,'text-anchor':'end',class:'axis-txt'}, opts.fmt(gv)));
+    }
+    var tick=Math.ceil(ND/7);
+    DAYS.forEach(function(d,i){
+      if(i%tick===0 || i===ND-1)
+        svg.appendChild(el('text',{x:x(i),y:H-10,'text-anchor':'middle',class:'axis-txt'}, fmtDate(d.date)));
+    });
+
+    // trend line (least squares over DAY index, so rest days weight it correctly)
+    var n=runDays.length, sx=0,sy=0,sxy=0,sxx=0;
+    runDays.forEach(function(p){ var v=p.r[key];
+      sx+=p.i; sy+=v; sxy+=p.i*v; sxx+=p.i*p.i; });
+    if(n>=2 && n*sxx-sx*sx!==0){
+      var slope=(n*sxy-sx*sy)/(n*sxx-sx*sx), icpt=(sy-slope*sx)/n;
+      var i0=runDays[0].i, i1=runDays[n-1].i;
+      svg.appendChild(el('line',{x1:x(i0),y1:y(icpt+slope*i0),x2:x(i1),y2:y(icpt+slope*i1),
+                                 class:'trend',stroke:'var(--ink-faint)'}));
+    }
+
+
+    var d=runDays.map(function(p,k){ return (k?'L':'M')+x(p.i)+' '+y(p.r[key]); }).join(' ');
+    svg.appendChild(el('path',{d:d,class:'series-line',stroke:opts.color||'var(--s1)'}));
+    runDays.forEach(function(p){
+      svg.appendChild(el('circle',{cx:x(p.i),cy:y(p.r[key]),r:5,class:'dot',fill:TYPE[p.r.type].c}));
+    });
+
+    var ch=el('line',{y1:M.t,y2:M.t+ih,class:'crosshair'}); svg.appendChild(ch);
+    var hit=el('rect',{x:M.l,y:M.t,width:iw,height:ih,class:'hit'}); svg.appendChild(hit);
+    host.appendChild(svg);
+
+    var tip=document.createElement('div'); tip.className='tip'; host.appendChild(tip);
+
+
+    hit.addEventListener('pointermove',function(e){
+      var bb=svg.getBoundingClientRect();
+      var di=Math.round((e.clientX-bb.left-M.l)/(iw||1)*(ND-1));
+      di=Math.max(0,Math.min(ND-1,di));
+      // snap to the nearest day that actually has a run
+      var best=runDays[0];
+      runDays.forEach(function(p){ if(Math.abs(p.i-di)<Math.abs(best.i-di)) best=p; });
+      var r=best.r;
+      ch.setAttribute('x1',x(best.i)); ch.setAttribute('x2',x(best.i)); ch.style.opacity=1;
+      tip.innerHTML='<div class="d">'+fmtDate(r.date)+' &middot; '+TYPE[r.type].n+(r.reviewed?'':' &middot; synced')+'</div>'+
+        '<div class="r"><span>Distance</span><span>'+r.km.toFixed(2)+' km</span></div>'+
+        '<div class="r"><span>Pace</span><span>'+mmss(r.pace)+'/km</span></div>'+
+        '<div class="r"><span>Avg HR</span><span>'+r.hr+' bpm</span></div>'+
+        '<div class="r"><span>Cost</span><span>'+Math.round(r.cost)+' beats/km</span></div>';
+      tip.style.opacity=1;
+      var tw=tip.offsetWidth, left=x(best.i)+12; if(left+tw>W) left=x(best.i)-tw-12;
+      tip.style.left=Math.max(0,left)+'px'; tip.style.top=(M.t+6)+'px';
+    });
+    hit.addEventListener('pointerleave',function(){ tip.style.opacity=0; ch.style.opacity=0; });
+  }
+
+  // ---- scatter: pace vs HR, coloured sequentially by date ----------------
+  function scatter(host) {
+    var W=host.clientWidth||660, H=340, M={t:16,r:18,b:44,l:52};
+    var iw=W-M.l-M.r, ih=H-M.t-M.b;
+    var px=RUNS.map(function(r){return r.pace;}), hy=RUNS.map(function(r){return r.hr;});
+    var xlo=Math.min.apply(null,px)-.08, xhi=Math.max.apply(null,px)+.08;
+    var ylo=Math.min.apply(null,hy)-4, yhi=Math.max.apply(null,hy)+4;
+    var X=function(v){ return M.l+(v-xlo)/(xhi-xlo)*iw; };
+    var Y=function(v){ return M.t+ih-(v-ylo)/(yhi-ylo)*ih; };
+
+    var svg=el('svg',{viewBox:'0 0 '+W+' '+H,width:W,height:H,role:'img','aria-label':'Scatter of pace against average heart rate for every logged run'});
+    for(var g=0; g<=4; g++){
+      var gv=ylo+(yhi-ylo)*g/4, gy=Y(gv);
+      svg.appendChild(el('line',{x1:M.l,x2:W-M.r,y1:gy,y2:gy,class:'grid-line'}));
+      svg.appendChild(el('text',{x:M.l-8,y:gy+4,'text-anchor':'end',class:'axis-txt'}, Math.round(gv)));
+    }
+    for(var g2=0; g2<=4; g2++){
+      var xv=xlo+(xhi-xlo)*g2/4;
+      svg.appendChild(el('text',{x:X(xv),y:H-24,'text-anchor':'middle',class:'axis-txt'}, mmss(xv)));
+    }
+    svg.appendChild(el('text',{x:M.l+iw/2,y:H-6,'text-anchor':'middle',class:'axis-txt'},'pace /km  ← faster'));
+    svg.appendChild(el('text',{x:14,y:M.t+ih/2,'text-anchor':'middle',class:'axis-txt',transform:'rotate(-90 14 '+(M.t+ih/2)+')'},'avg HR  ↓ lower'));
+
+    host.appendChild(svg);
+    var tip=document.createElement('div'); tip.className='tip'; host.appendChild(tip);
+
+    RUNS.forEach(function(r,i){
+      var band=Math.min(SEQ.length-1, Math.floor(i/RUNS.length*SEQ.length));
+      var c=el('circle',{cx:X(r.pace),cy:Y(r.hr),r:7,class:'dot',fill:SEQ[band]});
+      c.style.cursor='pointer';
+      c.addEventListener('pointerenter',function(){
+        tip.innerHTML='<div class="d">'+fmtDate(r.date)+' &middot; '+TYPE[r.type].n+'</div>'+
+          '<div class="r"><span>Pace</span><span>'+mmss(r.pace)+'/km</span></div>'+
+          '<div class="r"><span>Avg HR</span><span>'+r.hr+' bpm</span></div>'+
+          '<div class="r"><span>Distance</span><span>'+r.km.toFixed(2)+' km</span></div>';
+        tip.style.opacity=1;
+        var tw=tip.offsetWidth, left=X(r.pace)+14; if(left+tw>W) left=X(r.pace)-tw-14;
+        tip.style.left=Math.max(0,left)+'px'; tip.style.top=Math.max(0,Y(r.hr)-20)+'px';
+      });
+      c.addEventListener('pointerleave',function(){ tip.style.opacity=0; });
+      svg.appendChild(c);
+    });
+
+    // legend is idempotent — reused across redraws rather than re-inserted
+    var lg=document.getElementById('scatter-legend');
+    if(!lg){ lg=document.createElement('div'); lg.className='legend'; lg.id='scatter-legend';
+             host.parentNode.insertBefore(lg, host); }
+    lg.innerHTML='<span class="lg"><span class="sw" style="background:var(--seq-1)"></span>'+fmtDate(RUNS[0].date)+'</span>'+
+                 '<span class="lg"><span class="sw" style="background:var(--seq-4)"></span>'+fmtDate(RUNS[Math.floor(RUNS.length/2)].date)+'</span>'+
+                 '<span class="lg"><span class="sw" style="background:var(--seq-6)"></span>'+fmtDate(RUNS[RUNS.length-1].date)+'</span>';
+  }
+
+  // ---- legend for run type ----------------------------------------------
+  var tl=document.createElement('div'); tl.className='legend';
+  tl.innerHTML=Object.keys(TYPE).map(function(k){
+    return '<span class="lg"><span class="sw" style="background:'+TYPE[k].c+'"></span>'+TYPE[k].n+'</span>';
+  }).join('')+'<span class="lg"><span class="sw" style="background:var(--ink-faint);height:2px;border-radius:0"></span>trend</span>'
+   +'<span class="lg"><span class="sw" style="background:var(--surface-2)"></span>no run that day</span>';
+  var pc=document.getElementById('p-cost'); pc.parentNode.insertBefore(tl,pc);
+
+  // ---- table -------------------------------------------------------------
+  document.getElementById('tbl').innerHTML =
+    '<thead><tr><th>Date</th><th>Type</th><th style="text-align:right">Km</th><th style="text-align:right">Pace</th><th style="text-align:right">Avg HR</th><th style="text-align:right">Beats/km</th><th>Status</th></tr></thead><tbody>'+
+    RUNS.slice().reverse().map(function(r){
+      return '<tr><td class="mono">'+fmtDate(r.date)+'</td><td><span class="pill">'+TYPE[r.type].n+'</span></td>'+
+             '<td class="n">'+r.km.toFixed(2)+'</td><td class="n">'+mmss(r.pace)+'</td>'+
+             '<td class="n">'+r.hr+'</td><td class="n">'+Math.round(r.cost)+'</td>'+
+             '<td>'+(r.reviewed?'reviewed':'synced')+'</td></tr>';
+    }).join('')+'</tbody>';
+
+  function drawAll(){
+    ['p-cost','p-scatter','p-hr','p-pace'].forEach(function(id){ document.getElementById(id).innerHTML=''; });
+    lineChart(document.getElementById('p-cost'),'cost',{h:300,l:52,color:'var(--s1)',fmt:function(v){return Math.round(v);},aria:'Heartbeats per kilometre over time'});
+    scatter(document.getElementById('p-scatter'));
+    lineChart(document.getElementById('p-hr'),'hr',{h:210,l:36,color:'var(--s1)',fmt:function(v){return Math.round(v);},aria:'Average heart rate over time'});
+    lineChart(document.getElementById('p-pace'),'pace',{h:210,l:46,color:'var(--s1)',fmt:mmss,aria:'Pace over time'});
+  }
+  drawAll();
+  var rt; addEventListener('resize',function(){ clearTimeout(rt); rt=setTimeout(drawAll,180); });
+})();
+</script>

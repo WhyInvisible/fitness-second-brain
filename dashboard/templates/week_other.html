@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% block title %}Week {{ '+' if offset >= 0 else '' }}{{ offset }} — Fitness Planner{% endblock %}
+
+{% block content %}
+<section class="mb-6">
+  <div class="flex items-baseline justify-between mb-4">
+    <h1 class="text-2xl font-semibold tracking-tight">
+      {% if offset == 0 %}This week
+      {% elif offset == 1 %}Next week
+      {% elif offset == -1 %}Last week
+      {% elif offset > 0 %}+{{ offset }} weeks
+      {% else %}{{ offset }} weeks ago
+      {% endif %}
+    </h1>
+    <div class="text-sm text-stone-500">
+      {{ start.strftime('%a %d %b') }} &rarr; {{ end.strftime('%a %d %b') }}
+    </div>
+  </div>
+
+  <div class="flex gap-2 mb-6">
+    <a href="/week/offset/{{ offset - 1 }}" class="text-sm text-stone-600 hover:text-stone-900 px-3 py-1 bg-white border border-stone-200 rounded">&larr; Earlier</a>
+    <a href="/" class="text-sm text-stone-600 hover:text-stone-900 px-3 py-1 bg-white border border-stone-200 rounded">This week</a>
+    <a href="/week/offset/{{ offset + 1 }}" class="text-sm text-stone-600 hover:text-stone-900 px-3 py-1 bg-white border border-stone-200 rounded">Later &rarr;</a>
+  </div>
+</section>
+
+{% if offset > 0 %}
+<div class="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-6 text-sm text-amber-900">
+  Future weeks: per-day session detail comes from the
+  <a href="/season" class="underline">season plan</a> and is decided each Sunday in the weekly review (rewriting <code class="font-mono">plans/current-week.md</code>). This view shows the season-plan macro for the corresponding phase + any pre-filled placeholders.
+</div>
+{% endif %}
+
+<section class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-6">
+  <div class="bg-white rounded-lg border border-stone-200 p-4">
+    <div class="text-xs uppercase tracking-wide text-stone-500 mb-1">Sessions logged</div>
+    <div class="text-2xl font-semibold">{{ metrics.activities|length }}</div>
+  </div>
+  <div class="bg-white rounded-lg border border-stone-200 p-4">
+    <div class="text-xs uppercase tracking-wide text-stone-500 mb-1">Run volume</div>
+    <div class="text-2xl font-semibold">{{ metrics.run_km }} km</div>
+  </div>
+  <div class="bg-white rounded-lg border border-stone-200 p-4">
+    <div class="text-xs uppercase tracking-wide text-stone-500 mb-1">Total minutes</div>
+    <div class="text-2xl font-semibold">{{ metrics.total_min }}</div>
+  </div>
+</section>
+
+{% if metrics.activities %}
+<section>
+  <h2 class="text-lg font-semibold mb-3">Activities</h2>
+  <div class="bg-white rounded-lg border border-stone-200 overflow-hidden">
+    <table class="w-full text-sm">
+      <thead class="bg-stone-50 text-stone-500 uppercase text-xs">
+        <tr>
+          <th class="text-left px-4 py-2 font-medium">When</th>
+          <th class="text-left px-4 py-2 font-medium">Type</th>
+          <th class="text-right px-4 py-2 font-medium">Distance</th>
+          <th class="text-right px-4 py-2 font-medium">Duration</th>
+          <th class="text-right px-4 py-2 font-medium">Pace</th>
+          <th class="text-right px-4 py-2 font-medium">Avg HR</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-stone-100">
+        {% for a in metrics.activities %}
+          <tr>
+            <td class="px-4 py-2 font-mono text-xs">{{ a.start_local[:16].replace('T', ' ') }}</td>
+            <td class="px-4 py-2">{{ a.type|replace('_', ' ') }}</td>
+            <td class="px-4 py-2 text-right">{{ a.distance_km or '—' }} km</td>
+            <td class="px-4 py-2 text-right">{{ a.duration_min|round|int if a.duration_min else '—' }} min</td>
+            <td class="px-4 py-2 text-right">{{ a.avg_pace_per_km or '—' }}</td>
+            <td class="px-4 py-2 text-right">{{ a.avg_hr|round|int if a.avg_hr else '—' }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% else %}
+<div class="text-stone-500 text-sm">No activities logged in this range.</div>
+{% endif %}
+{% endblock %}

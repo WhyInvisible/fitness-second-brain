@@ -1,0 +1,70 @@
+{
+ "strength-a": {
+  "label": "Strength A",
+  "kind": "legs",
+  "subtitle": "~30 min \u00b7 dumbbells \u00b7 after an easy run or on a rest day",
+  "blocks": [
+   {
+    "title": "Main",
+    "cols": [
+     "Exercise",
+     "Sets x reps",
+     "Load"
+    ],
+    "rows": [
+     [
+      "Goblet squat",
+      "3 x 8",
+      "moderate, 2 reps in reserve"
+     ],
+     [
+      "Romanian deadlift",
+      "3 x 8",
+      "moderate"
+     ],
+     [
+      "Split squat",
+      "2 x 8 / side",
+      "bodyweight -> light"
+     ],
+     [
+      "Single-leg calf raise",
+      "3 x 12 / side",
+      "bodyweight"
+     ]
+    ]
+   }
+  ],
+  "notes": [
+   "Stop each set with 2 good reps left. Add load only when every set is clean."
+  ]
+ },
+ "mobility": {
+  "label": "Mobility",
+  "kind": "stability",
+  "subtitle": "~10 min \u00b7 before or after an easy run",
+  "blocks": [
+   {
+    "title": "Circuit",
+    "cols": [
+     "Drill",
+     "Dose"
+    ],
+    "rows": [
+     [
+      "Hip airplane",
+      "5 / side"
+     ],
+     [
+      "Ankle rocks",
+      "10 / side"
+     ],
+     [
+      "Dead bug",
+      "2 x 8 / side"
+     ]
+    ]
+   }
+  ]
+ }
+}

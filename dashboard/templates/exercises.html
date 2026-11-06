@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Exercises ({{ total }}) — Fitness Planner{% endblock %}
+
+{% block content %}
+<section class="mb-6">
+  <h1 class="text-2xl font-semibold tracking-tight">Exercise library</h1>
+  <p class="text-sm text-stone-500 mt-1">{{ total }} exercises across {{ groups|length }} patterns. Click any to see form cues, sources, demo images.</p>
+</section>
+
+<input type="search" id="filter" placeholder="Filter by name..." class="w-full mb-6 px-3 py-2 border border-stone-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-stone-300"
+  oninput="document.querySelectorAll('.ex-card').forEach(c=>{c.style.display=c.dataset.label.toLowerCase().includes(this.value.toLowerCase())?'':'none';})" />
+
+{% for pattern, exercises in groups %}
+<section class="mb-8">
+  <h2 class="text-lg font-semibold mb-3 text-stone-700">
+    {{ pattern|replace('_', ' ')|capitalize }}
+    <span class="text-sm font-normal text-stone-400">({{ exercises|length }})</span>
+  </h2>
+  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+    {% for ex in exercises %}
+      <a href="/exercise/{{ ex.slug }}" class="ex-card block bg-white rounded-lg border border-stone-200 hover:border-stone-400 hover:shadow-sm transition p-3" data-label="{{ ex.title }}">
+        <div class="font-medium text-sm text-stone-900 leading-tight">{{ ex.title }}</div>
+        <div class="mt-2 flex flex-wrap gap-1">
+          {% if ex.meta.equipment %}
+            {% for e in ex.meta.equipment[:2] %}
+              <span class="text-xs px-1.5 py-0.5 bg-stone-100 text-stone-600 rounded">{{ e }}</span>
+            {% endfor %}
+          {% endif %}
+          {% if has_image[ex.slug] %}
+            <span class="text-xs px-1.5 py-0.5 bg-emerald-50 text-emerald-700 rounded">img</span>
+          {% endif %}
+          {% if ex.meta.difficulty %}
+            <span class="text-xs px-1.5 py-0.5 bg-amber-50 text-amber-700 rounded">L{{ ex.meta.difficulty }}</span>
+          {% endif %}
+        </div>
+      </a>
+    {% endfor %}
+  </div>
+</section>
+{% endfor %}
+{% endblock %}

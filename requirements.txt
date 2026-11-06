@@ -1,0 +1,18 @@
+# Workspace scripts (sync, reports, dashboard). The Telegram bot has its own bot/requirements.txt.
+python-dotenv>=1.0
+requests>=2.31
+pyyaml>=6.0
+
+# Data sources — install the ones you use
+garminconnect>=0.2.25      # DATA_SOURCES=garmin
+fitparse>=1.2              # DATA_SOURCES=files (FIT files; GPX/TCX need nothing)
+
+# Local dashboard (./serve-dashboard.sh)
+fastapi>=0.110
+uvicorn>=0.29
+jinja2>=3.1
+markdown>=3.5
+
+# Knowledge-base tools
+pypdf>=4.0                 # scripts/pdf-to-text.py
+rapidfuzz>=3.0             # scripts/sync-exercisedb.py

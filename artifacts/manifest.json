@@ -1,0 +1,28 @@
+{
+  "pages": {
+    "training-plan": {
+      "file": "artifacts/training-plan.html",
+      "title": "Training Plan",
+      "icon": "calendar",
+      "description": "Day-by-day training plan with logged sessions laid over it.",
+      "url": null,
+      "built_hash": null,
+      "built_at": null,
+      "published_hash": null,
+      "published_at": null,
+      "has_data": null
+    },
+    "progress": {
+      "file": "artifacts/progress.html",
+      "title": "Training Progress",
+      "icon": "chart",
+      "description": "Every logged run: heartbeats per km, pace against heart rate, trends.",
+      "url": null,
+      "built_hash": null,
+      "built_at": null,
+      "published_hash": null,
+      "published_at": null,
+      "has_data": null
+    }
+  }
+}

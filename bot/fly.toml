@@ -1,0 +1,23 @@
+# Fly.io app config for the Telegram bot. See docs/bot.md.
+# 1. Rename `app` to the name you used in `fly apps create`.
+# 2. Set `primary_region` to a region near you (`fly platform regions`).
+# 3. Set TIMEZONE to your IANA timezone — the daily pings and Sunday review run on it.
+
+app = "my-fitness-bot"
+primary_region = "lhr"
+
+[build]
+  dockerfile = "Dockerfile"
+
+# The bot uses Telegram long-polling — no inbound HTTP needed.
+# So no [http_service] block, and no public IP required.
+
+[env]
+  TIMEZONE = "Europe/London"
+  WORKSPACE_DIR = "/tmp/workspace"
+
+# Single small VM, always-on.
+[[vm]]
+  size = "shared-cpu-1x"
+  memory = "256mb"
+  cpus = 1

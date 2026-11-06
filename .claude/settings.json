@@ -1,0 +1,38 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/scripts/hooks/workspace_hook.py\" session-start || python \"$CLAUDE_PROJECT_DIR/scripts/hooks/workspace_hook.py\" session-start",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit|Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/scripts/hooks/workspace_hook.py\" post-tool-use || python \"$CLAUDE_PROJECT_DIR/scripts/hooks/workspace_hook.py\" post-tool-use",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/scripts/hooks/workspace_hook.py\" stop || python \"$CLAUDE_PROJECT_DIR/scripts/hooks/workspace_hook.py\" stop",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  }
+}

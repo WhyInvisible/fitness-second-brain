@@ -1,0 +1,9 @@
+python-telegram-bot[job-queue]==21.6
+google-genai>=0.8.0
+anthropic>=2.6.0
+python-dotenv==1.0.1
+PyYAML==6.0.2
+GitPython==3.1.43
+# Used by scripts/sync.py when the bot runs the daily data sync
+garminconnect>=0.2.25
+requests>=2.31

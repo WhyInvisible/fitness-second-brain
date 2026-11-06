@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}{{ doc.title }} — Exercise{% endblock %}
+
+{% block content %}
+<section class="mb-4">
+  <a href="/exercises" class="text-sm text-stone-500 hover:text-stone-900">&larr; All exercises</a>
+  <h1 class="text-2xl font-semibold tracking-tight mt-2">{{ doc.title }}</h1>
+  {% if doc.meta %}
+    <div class="mt-2 flex flex-wrap gap-2 text-xs">
+      {% if doc.meta.patterns %}
+        {% for p in doc.meta.patterns %}
+          <span class="px-2 py-0.5 bg-sky-50 text-sky-700 rounded">{{ p }}</span>
+        {% endfor %}
+      {% endif %}
+      {% if doc.meta.muscles %}
+        {% for m in doc.meta.muscles %}
+          <span class="px-2 py-0.5 bg-rose-50 text-rose-700 rounded">{{ m }}</span>
+        {% endfor %}
+      {% endif %}
+      {% if doc.meta.equipment %}
+        {% for e in doc.meta.equipment %}
+          <span class="px-2 py-0.5 bg-stone-100 text-stone-700 rounded">{{ e }}</span>
+        {% endfor %}
+      {% endif %}
+      {% if doc.meta.difficulty %}
+        <span class="px-2 py-0.5 bg-amber-50 text-amber-700 rounded">difficulty L{{ doc.meta.difficulty }}</span>
+      {% endif %}
+      {% if doc.meta.back_friendly is sameas true or doc.meta['back-friendly'] is sameas true %}
+        <span class="px-2 py-0.5 bg-emerald-50 text-emerald-700 rounded">back-friendly</span>
+      {% endif %}
+      {% if doc.meta.runner_specific is sameas true or doc.meta['runner-specific'] is sameas true %}
+        <span class="px-2 py-0.5 bg-indigo-50 text-indigo-700 rounded">runner-specific</span>
+      {% endif %}
+    </div>
+  {% endif %}
+</section>
+
+{% if image_url %}
+<section class="mb-6">
+  <img src="{{ image_url }}" alt="{{ doc.title }} demonstration" class="max-w-md w-full rounded-lg border border-stone-200" />
+</section>
+{% endif %}
+
+<section class="bg-white rounded-lg border border-stone-200 p-6 prose-page">
+  {{ body_html | safe }}
+</section>
+{% endblock %}

@@ -1,0 +1,36 @@
+# Credentials — never commit
+.env
+bot/.env
+.garminconnect/
+data/.strava-token.json
+
+# Raw device archives (FIT files, per-second streams) and dropped-in exports — large, personal
+data/raw/
+data/inbox/
+
+# Source corpus (books, PDFs, extracted text) — usually copyrighted, keep laptop-local
+resources/
+
+# Built pages are derived from plans/ + data/; manifest.json IS committed (keeps artifact URLs)
+artifacts/*.html
+
+# Bot scratch: weekly review drafts awaiting approval
+plans/.pending-*
+
+# Script caches + local logs
+scripts/_*.json
+scripts/_*.log
+
+# Local tool config
+.claude/settings.local.json
+.obsidian/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,62 @@
+{
+ "2027-03-01": {
+  "km": 6.1,
+  "pace": "6:05/km",
+  "avg_hr": 141,
+  "max_hr": 152,
+  "cal": 420,
+  "comment": "Felt easy, legs a bit heavy from the weekend.",
+  "notes": "HR at the top of the easy band.",
+  "source": "garmin"
+ },
+ "2027-03-02": {
+  "km": 9.0,
+  "pace": "5:31/km",
+  "avg_hr": 158,
+  "max_hr": 167,
+  "cal": 640,
+  "comment": "Reps felt controlled.",
+  "notes": "",
+  "source": "garmin"
+ },
+ "2027-03-04": {
+  "km": 7.0,
+  "pace": "5:58/km",
+  "avg_hr": 143,
+  "max_hr": 171,
+  "cal": 480,
+  "comment": "Strides sharp.",
+  "notes": "",
+  "source": "garmin"
+ },
+ "2027-03-06": {
+  "km": 14.2,
+  "pace": "6:02/km",
+  "avg_hr": 146,
+  "max_hr": 160,
+  "cal": 990,
+  "comment": "Knee fine on the downhills.",
+  "notes": "",
+  "source": "garmin"
+ },
+ "2027-03-07": {
+  "km": 5.0,
+  "pace": "6:20/km",
+  "avg_hr": 136,
+  "max_hr": 145,
+  "cal": 330,
+  "comment": "Recovery.",
+  "notes": "",
+  "source": "garmin"
+ },
+ "2027-03-08": {
+  "km": 7.0,
+  "pace": "5:57/km",
+  "avg_hr": 138,
+  "max_hr": 150,
+  "cal": 470,
+  "comment": "Best easy run in weeks.",
+  "notes": "Same pace as last Monday for 3 bpm less.",
+  "source": "garmin"
+ }
+}

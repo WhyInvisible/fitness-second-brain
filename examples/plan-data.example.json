@@ -1,0 +1,174 @@
+[
+ {
+  "week": 1,
+  "phase": "Base",
+  "start": "2027-03-01",
+  "end": "2027-03-07",
+  "total": 41,
+  "days": [
+   {
+    "date": "2027-03-01",
+    "dow": "Mon",
+    "label": "Easy run",
+    "km": 6,
+    "type": "easy",
+    "pace": "RPE 3-4, conversational",
+    "sessions": [
+     "mobility"
+    ],
+    "note": ""
+   },
+   {
+    "date": "2027-03-02",
+    "dow": "Tue",
+    "label": "Steady threshold",
+    "km": 9,
+    "type": "lt1",
+    "pace": "3 x 10 min @ LT1 HR, 2 min jog",
+    "sessions": [],
+    "note": ""
+   },
+   {
+    "date": "2027-03-03",
+    "dow": "Wed",
+    "label": "Rest",
+    "km": 0,
+    "type": "rest",
+    "pace": "-",
+    "sessions": [
+     "strength-a"
+    ],
+    "note": ""
+   },
+   {
+    "date": "2027-03-04",
+    "dow": "Thu",
+    "label": "Easy + strides",
+    "km": 7,
+    "type": "strides",
+    "pace": "easy, then 6 x 20 s strides",
+    "sessions": [],
+    "note": ""
+   },
+   {
+    "date": "2027-03-05",
+    "dow": "Fri",
+    "label": "Rest",
+    "km": 0,
+    "type": "rest",
+    "pace": "-",
+    "sessions": [],
+    "note": ""
+   },
+   {
+    "date": "2027-03-06",
+    "dow": "Sat",
+    "label": "Long run",
+    "km": 14,
+    "type": "long",
+    "pace": "easy, last 3 km steady",
+    "sessions": [],
+    "note": "Check how the knee feels on the downhills."
+   },
+   {
+    "date": "2027-03-07",
+    "dow": "Sun",
+    "label": "Recovery jog",
+    "km": 5,
+    "type": "easy",
+    "pace": "very easy",
+    "sessions": [
+     "strength-a"
+    ],
+    "note": ""
+   }
+  ]
+ },
+ {
+  "week": 2,
+  "phase": "Base",
+  "start": "2027-03-08",
+  "end": "2027-03-14",
+  "total": 46,
+  "tag": "+12% volume",
+  "days": [
+   {
+    "date": "2027-03-08",
+    "dow": "Mon",
+    "label": "Easy run",
+    "km": 7,
+    "type": "easy",
+    "pace": "RPE 3-4, conversational",
+    "sessions": [
+     "mobility"
+    ],
+    "note": ""
+   },
+   {
+    "date": "2027-03-09",
+    "dow": "Tue",
+    "label": "Steady threshold",
+    "km": 10,
+    "type": "lt1",
+    "pace": "3 x 10 min @ LT1 HR, 2 min jog",
+    "sessions": [],
+    "note": ""
+   },
+   {
+    "date": "2027-03-10",
+    "dow": "Wed",
+    "label": "Rest",
+    "km": 0,
+    "type": "rest",
+    "pace": "-",
+    "sessions": [
+     "strength-a"
+    ],
+    "note": ""
+   },
+   {
+    "date": "2027-03-11",
+    "dow": "Thu",
+    "label": "Easy + strides",
+    "km": 8,
+    "type": "strides",
+    "pace": "easy, then 6 x 20 s strides",
+    "sessions": [],
+    "note": ""
+   },
+   {
+    "date": "2027-03-12",
+    "dow": "Fri",
+    "label": "Rest",
+    "km": 0,
+    "type": "rest",
+    "pace": "-",
+    "sessions": [],
+    "note": ""
+   },
+   {
+    "date": "2027-03-13",
+    "dow": "Sat",
+    "label": "Long run",
+    "km": 15,
+    "type": "long",
+    "pace": "easy, last 3 km steady",
+    "sessions": [],
+    "note": "Check how the knee feels on the downhills.",
+    "key": true
+   },
+   {
+    "date": "2027-03-14",
+    "dow": "Sun",
+    "label": "Recovery jog",
+    "km": 6,
+    "type": "easy",
+    "pace": "very easy",
+    "sessions": [
+     "strength-a"
+    ],
+    "note": ""
+   }
+  ]
+ }
+]

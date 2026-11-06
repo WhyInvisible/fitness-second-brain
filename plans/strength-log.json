@@ -1,0 +1,22 @@
+{
+  "_schema": {
+    "description": "Structured record of every non-running session: what was actually done, set by set, plus how it felt. Companion to training-actuals.json (which holds runs). Query with scripts/strength-history.py.",
+    "keys": "date (YYYY-MM-DD) -> list of sessions",
+    "session_fields": {
+      "session": "key into plans/session-library.json",
+      "label": "human-readable name",
+      "device": "duration_min / avg_hr / max_hr / cal / training_load, if the session was recorded on a watch",
+      "rpe": "0-10, athlete-reported",
+      "felt": "athlete's own words",
+      "exercises": "list of {name, sets:[{reps, load_kg|hold_s, note}], note}",
+      "confidence": "'reported' = athlete gave set-by-set detail; 'prescribed' = only loads confirmed, sets assumed from the plan"
+    }
+  },
+  "_watchpoints": {
+    "_note": "Standing weaknesses and targets carried from session to session. strength-history.py --brief <session> prints the relevant ones before every session. Add as they appear; update as they improve; delete when fixed.",
+    "technique": [],
+    "running": [],
+    "physical_flags": [],
+    "live_targets": []
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "_schema": {
+    "description": "Body-weight / body-composition log. One entry per measurement. Conditions matter more than frequency: compare like with like.",
+    "protocol": "First thing in the morning, fasted, after the toilet, same scale. Anything measured otherwise gets its conditions noted and is not trend-comparable.",
+    "fields": {
+      "date": "ISO date",
+      "kg": "weight in kilograms",
+      "conditions": "am-fasted | am-fed | pm | estimate",
+      "note": "anything that affects the reading (travel, illness, a big session the day before)"
+    }
+  },
+  "entries": []
+}
